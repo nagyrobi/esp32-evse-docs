@@ -2,23 +2,28 @@
 title: ESP32-S2 EVSE DIY Alpha
 ---
 
-## Desciption
+## Overview
 
-[EasyEDA project](https://oshwlab.com/dzurik.miroslav/esp32s2-diy-evse)
+A board based on ESP32-S2 you can assemble yourself is ESP32-S2 EVSE DIY Alpha. Has onboard three phase energy meter, RS485, UART, 1WIRE, RCM, socket lock.
+
+![ESP32-S2-DA](/images/esp32s2da.jpg)
+
+You can order the PCB from the [EasyEDA project](https://oshwlab.com/dzurik.miroslav/esp32s2-diy-evse) page, even assembled.
 
 ![Pinout](/images/esp32s2da-terminals.png)
 
 The dimensions of the board are 150x122 mm, designed to fit into the UM122 enclosure.
 
 ### Buttons
-| Name  | Meaning                                              | Note          |
-| ----- | ---------------------------------------------------- | ------------- |
-| BOOT  | Activate WiFi AP, during restart enter flashing mode | ESP gpio0 pin |
-| RESET | Restart controller                                   | ESP en pin    |
 
+| Name  | Usage                                                | Note             |
+| ----- | ---------------------------------------------------- | ---------------- |
+| BOOT  | Activate WiFi AP, during restart enter flashing mode | GPIO0 pin on ESP |
+| RESET | Restart controller                                   | EN pin ESP       |
 
 ### LEDs
-| Name | Meaning  | Color | Description                                                                                                                                   |
+
+| Name | Usage    | Color | Description                                                                                                                                   |
 | ---- | -------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | WIFI | WiFi     | Blue  | on - connected to WiFi <br/> flashing (on/off 100/900ms) - Started WiFi AP <br/> flashing (on/off 1900/100ms) - WiFi AP has client connection |
 | CHR  | Charging | Green | flashing - vehicle connected but not charging <br/> on - vehicle charging                                                                     |
@@ -26,7 +31,7 @@ The dimensions of the board are 150x122 mm, designed to fit into the UM122 enclo
 
 ### Terminals
 
-| Name   | Meaning                                | Note                                     |
+| Name   | Usage                                  | Note                                     |
 | ------ | -------------------------------------- | ---------------------------------------- |
 | B      | Detection of the locking actuator      |                                          |
 | R      | Control of the locking actuator        |                                          |
@@ -63,19 +68,19 @@ The dimensions of the board are 150x122 mm, designed to fit into the UM122 enclo
 
 ## Connection examples
 
-L1 - L3 connection is for measuring charging voltage, they are optional. Use 100mA fuse to connect them to the lines.
+L1 - L3 connections onboard charging voltage meter, they are optional. Use 30mA fuses to connect them to the lines.
 
-CT1 - CT3 are current transformers for measuring charging current, they are optional. Can be used any which has ratio 2000/1 (for example: DL-CT08CL5 or SCT-013-000). 
+CT1 - CT3 connections for current transformers measuring charging current, they are optional. Can be used any with ratio 2000/1 (for example: DL-CT08CL5 or SCT-013-000). 
 
-When you have setup without current transformers and voltages connection set `Energy meter Mode` to `Dummy`, power will be calculated from actual charging current and provided `AC voltage`.
+If you don't want to have an onboard meter, set `Energy meter` `Mode` to `Dummy`, power will be calculated from actual charging current slider and the `AC voltage` value in the settings.
 
-When you have only current transformers, can be set `Energy meter Mode` to `Current sensing`, power will be calculated from measured  current and provided `AC voltage`.
+When you only have current transformers, set `Energy meter` `Mode` to `Current sensing`, power will be calculated from measured current and the `AC voltage` value in the settings.
 
-When you have current transformers and voltages connection, can be set `Energy meter Mode` to `Current and voltage sensing`, power will be calculated from measured current and voltage.
+When you have current transformers and voltages connected, set `Energy meter Mode` to `Current and voltage sensing`, power will be calculated from the real measured current and voltage.
 
-Remember set `Energy meter Three phases` depending on whether you have a single-phase or three-phase connection.
+Remember to check `Energy meter` checkbox `Three phases` in case your installation is relying on a three-phase connection.
 
-Residual Current Monitor (RCM) is optional, if is not available it must be disabled in settings.
+`Residual Current Monitor` (RCM) is optional, if is not available it must be disabled in settings.
 
 ### With socket outlet
 
@@ -89,15 +94,3 @@ Set `Max charging current` to the value of the circuit breaker that protects the
 
 Set `Max charging current` to the lower value of the circuit breaker that protects the EVSE or cable maximum current.
 
-## Wallbox build example
-
-Placed in standard plastic electrical box (300x400x200mm). Based on connection with socket outlet with additional features:
-
-* Low tariff enable input
-* RCM
-* Nextion display NX4827P043-011C-Y
-* Dragino LoraWAN module
-
-![Wallbox](/images/esp32s2da-wallbox.jpg)
-
-Emergency stop button not wired yet...
