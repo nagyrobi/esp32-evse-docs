@@ -1,17 +1,18 @@
 ---
-title: Board config schema reference
+title: Board configuration schema
 ---
-# Board config schema
+# Board configuration schema
 
 [Reference schema](http://json-schema.org/draft-07/schema#)
 
-[Bodard schema](https://github.com/dzurikmiroslav/esp32-evse/tree/master/board-config).
+Current [Board schema](https://github.com/dzurikmiroslav/esp32-evse/tree/master/board-config) YAML configurations
 
-# definitions
+## Definitions
 
-**_BoardConfig_**
+### Board config
 
- - ## Board config
+Board hardware configuration
+
  - Type: `object`
  - <i id="/definitions/BoardConfig">path: #/definitions/BoardConfig</i>
  - This schema <u>does not</u> accept additional properties.
@@ -90,10 +91,10 @@ title: Board config schema reference
 		 - &#36;ref: [#/definitions/Onewire](#/definitions/Onewire)
 
 
-**_EnergyMeter_**
+### EnergyMeter
 
- - ## EnergyMeter
- - _Energy meter configuration_
+Energy meter configuration
+
  - Type: `object`
  - <i id="/definitions/EnergyMeter">path: #/definitions/EnergyMeter</i>
  - This schema <u>does not</u> accept additional properties.
@@ -124,10 +125,10 @@ title: Board config schema reference
 		 - <i id="/definitions/EnergyMeter/properties/voltageScale">path: #/definitions/EnergyMeter/properties/voltageScale</i>
 
 
-**_Pilot_**
+### Control Pilot
 
- - ## Pilot
- - _Control pilot configuration_
+Control Pilot signal configuration
+
  - Type: `object`
  - <i id="/definitions/Pilot">path: #/definitions/Pilot</i>
  - This schema <u>does not</u> accept additional properties.
@@ -150,10 +151,10 @@ title: Board config schema reference
 			 - <i id="/definitions/Pilot/properties/levels/items">path: #/definitions/Pilot/properties/levels/items</i>
 
 
-**_Proximity_**
+### Proximity Pilot
 
- - ## Proximity
- - _Proximity pilot configuration_
+Proximity pilot configuration
+
  - Type: `object`
  - <i id="/definitions/Proximity">path: #/definitions/Proximity</i>
  - This schema <u>does not</u> accept additional properties.
@@ -172,10 +173,10 @@ title: Board config schema reference
 			 - <i id="/definitions/Proximity/properties/levels/items">path: #/definitions/Proximity/properties/levels/items</i>
 
 
-**_SocketLock_**
+### Socket Lock
 
- - ## SocketLock
- - _Socket lock configuration_
+Socket lock configuration
+
  - Type: `object`
  - <i id="/definitions/SocketLock">path: #/definitions/SocketLock</i>
  - This schema <u>does not</u> accept additional properties.
@@ -202,10 +203,10 @@ title: Board config schema reference
 		 - <i id="/definitions/SocketLock/properties/minBreakTime">path: #/definitions/SocketLock/properties/minBreakTime</i>
 
 
-**_Rcm_**
+### RCM
 
- - ## Rcm
- - _Residual current monitor configuration_
+Residual current monitor configuration
+
  - Type: `object`
  - <i id="/definitions/Rcm">path: #/definitions/Rcm</i>
  - This schema <u>does not</u> accept additional properties.
@@ -220,10 +221,10 @@ title: Board config schema reference
 		 - <i id="/definitions/Rcm/properties/testGpio">path: #/definitions/Rcm/properties/testGpio</i>
 
 
-**_AuxInput_**
+### Aux input
 
- - ## Aux input
- - _Aux input configuration_
+Auxiliary inputs configuration
+
  - Type: `object`
  - <i id="/definitions/AuxInput">path: #/definitions/AuxInput</i>
  - This schema <u>does not</u> accept additional properties.
@@ -239,10 +240,10 @@ title: Board config schema reference
 		 - <i id="/definitions/AuxInput/properties/gpio">path: #/definitions/AuxInput/properties/gpio</i>
 
 
-**_AuxOutput_**
+### Aux output
 
- - ## Aux output
- - _Aux output configuration_
+Auxiliary outputs configuration
+
  - Type: `object`
  - <i id="/definitions/AuxOutput">path: #/definitions/AuxOutput</i>
  - This schema <u>does not</u> accept additional properties.
@@ -258,10 +259,10 @@ title: Board config schema reference
 		 - <i id="/definitions/AuxOutput/properties/gpio">path: #/definitions/AuxOutput/properties/gpio</i>
 
 
-**_AuxAnalogInput_**
+### Aux analog input
 
- - ## Aux analog input
- - _Aux analog input configuration_
+Auxiliary analog input configuration
+
  - Type: `object`
  - <i id="/definitions/AuxAnalogInput">path: #/definitions/AuxAnalogInput</i>
  - This schema <u>does not</u> accept additional properties.
@@ -277,10 +278,10 @@ title: Board config schema reference
 		 - <i id="/definitions/AuxAnalogInput/properties/adcChannel">path: #/definitions/AuxAnalogInput/properties/adcChannel</i>
 
 
-**_Serial_**
+### Serial
 
- - ## Serial
- - _Serial port configuration_
+Serial ports configuration
+
  - Type: `object`
  - <i id="/definitions/Serial">path: #/definitions/Serial</i>
  - This schema <u>does not</u> accept additional properties.
@@ -311,10 +312,10 @@ title: Board config schema reference
 		 - <i id="/definitions/Serial/properties/rtsGpio">path: #/definitions/Serial/properties/rtsGpio</i>
 
 
-**_Onewire_**
+### Onewire
 
- - ## Onewire
- - _Onewire bus configuration_
+Onewire bus configuration
+
  - Type: `object`
  - <i id="/definitions/Onewire">path: #/definitions/Onewire</i>
  - This schema <u>does not</u> accept additional properties.
@@ -328,4 +329,3 @@ title: Board config schema reference
 		 - Type: `boolean`
 		 - <i id="/definitions/Onewire/properties/temperatureSensor">path: #/definitions/Onewire/properties/temperatureSensor</i>
 
-_Generated with [json-schema-md-doc](https://brianwendt.github.io/json-schema-md-doc/)_
