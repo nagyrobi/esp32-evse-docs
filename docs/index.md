@@ -1,33 +1,111 @@
 ---
 title: Welcome
-description: This revolutionary software enables EV battery packs to be easily reused for stationary storage in combination with solar inverters 
+description:  J1772 EVSE firmware for ESP32 based devices 
 hide:
   - navigation
 ---
+![ESP32 EVSE](https://github.com/dzurikmiroslav/esp32-evse/wiki/images/logo-full.svg)
 
-# Battery-Emulator ⚡🔋
-![GitHub release (with filter)](https://img.shields.io/github/v/release/dalathegreat/BYD-Battery-Emulator-For-Gen24?color=%23008000)
-![GitHub Repo stars](https://img.shields.io/github/stars/dalathegreat/Battery-Emulator?style=flat&color=%23128512)
-![GitHub forks](https://img.shields.io/github/forks/dalathegreat/Battery-Emulator?style=flat&color=%23128512)
-![GitHub actions](https://img.shields.io/github/actions/workflow/status/dalathegreat/BYD-Battery-Emulator-For-Gen24/compile-common-image-lilygo-TCAN.yml?color=0E810E)
-![Static Badge](https://img.shields.io/badge/made-with_love-blue?color=%23008000)
+J1772 EVSE firmware for ESP32 based devices.
 
-## What is Battery Emulator?
+![Build with ESP-IDF](https://github.com/dzurikmiroslav/esp32-evse/workflows/Build/badge.svg)
+[![GitHub version](https://img.shields.io/github/release/dzurikmiroslav/esp32-evse.svg)](https://github.com/dzurikmiroslav/esp32-evse/releases/latest)
+[![License](https://img.shields.io/github/license/dzurikmiroslav/esp32-evse.svg)](LICENSE.md)
+[![GitHub Sponsors](https://img.shields.io/badge/donate-GitHub_Sponsors-blue)](https://github.com/sponsors/dzurikmiroslav)
+[![Web installer](https://img.shields.io/badge/web-installer-green?style=flat&logo=googlechrome&logoColor=lightgrey)](https://dzurikmiroslav.github.io/esp32-evse/web-installer)
 
-Many manufacturers sell home battery systems to enable homeowners to store power collected from the grid, or renewable sources, to use at times when electricity demand is higher. However almost all of these home battery systems charge a high cost for every kilowatt hour (kWh) of capacity you buy.
+## Key features
+ - Hardware abstraction for device design
+ - Responsive web-interface
+ - OTA update
+ - Integrated energy meter
+ - REST API
+ - WebDAV
+ - [Modbus](https://github.com/dzurikmiroslav/esp32-evse/wiki/Modbus) (RS485, TCP)
+ - [Lua scripting](https://github.com/dzurikmiroslav/esp32-evse/wiki/Lua)
+ - [Nextion HMI](https://github.com/dzurikmiroslav/esp32-evse/wiki/Nextion)
+ - [AT commands](https://github.com/dzurikmiroslav/esp32-evse/wiki/AT-commands)
+ - Scheduler
 
-At the same time, EV manufacturers have been putting high capacity battery packs into their cars, with no firm plan for what should happen to those batteries if the car is damaged in a crash, or reaches the end of its life as a vehicle.
+### Web installer
 
-**Battery Emulator** enables EV battery packs to be repurposed for stationary storage. It acts as a translation layer between the EV battery and the home inverter. This makes it extremely cheap and easy to use large EV batteries in a true plug'n'play fashion!
+Easy initial installation of esp32-evse firmware can be performed using your browser (currently Google Chrome or Microsoft Edge).
 
-## Quickstart guide 📜
-- Pick a [supported inverter](https://github.com/dalathegreat/Battery-Emulator/wiki#supported-inverters-list) (solar panels optional) :sun_with_face: 
-- Pick a [supported battery](https://github.com/dalathegreat/Battery-Emulator/wiki#supported-batteries-list) :battery: 
-- Order the Battery-Emulator [compatible hardware](https://github.com/dalathegreat/Battery-Emulator/wiki#where-do-i-get-the-hardware-needed) :robot: 
-- Follow the [installation guidelines](https://github.com/dalathegreat/Battery-Emulator/wiki/Installation-guidelines) section for how to install and commission your battery properly :notebook: 
+[ Web installer](https://dzurikmiroslav.github.io/esp32-evse/web-installer)
 
-!!! warning "CAUTION"
-    Working with high voltage is dangerous. Always follow local laws and regulations regarding high voltage work. If you are unsure about the rules in your country, consult a licensed electrician for more information.
+### Device definition method
 
-## Like this project? 💖
-Consider hopping onto my [Patreon](https://www.patreon.com/dala) to encourage more open-source projects! As a bonus, you will get access to the Discord server, where we hangout, develop, support, share, discuss etc. all things related to DIY EV storage solutions. See you on the server? ;)
+_One firmware to rule them all._ Not really :-) one per device platform (ESP32, ESP32-S2...).
+
+There is no need to compile the firmware for your EVSE design.
+Source code ist not hardcoded to GPIOs or other hardware design features.
+All code is written in ESP-IDF without additional mapping layer like Arduino.
+
+All configuration is written outside firmware in configuration file named _board.yaml_ on dedicated partition.
+For example, on following scheme is minimal EVSE circuit with ESP32 devkit.
+
+![Minimal circuit](https://github.com/dzurikmiroslav/esp32-evse/wiki/images/minimal-circuit.png)
+
+For this circuit there is config file _board.yaml_, for more information's see [YAML schema](board-config/board-config-schema-1.json).
+
+```yaml
+deviceName: ESP32 minimal EVSE
+
+button:
+  gpio: 0
+
+pilot:
+  gpio: 33
+  adcChannel: 7
+  levels: [2410, 2104, 1797, 1491, 265]
+
+acRelay:
+  gpios: [32]
+```
+
+### Web interface
+
+Fully responsive web interface is accessible local network IP address on port 80.
+
+Dashboard page
+
+![Dashboard](https://github.com/dzurikmiroslav/esp32-evse/wiki/images/web-dashboard.png) 
+
+Settings page
+
+![Settings](https://github.com/dzurikmiroslav/esp32-evse/wiki/images/web-settings.png)
+
+Mobile dashboard page
+
+![Dashboard mobile](https://github.com/dzurikmiroslav/esp32-evse/wiki/images/web-dashboard-mobile.png)
+
+## Hardware
+
+### ESP32DevkitC EVSE
+
+Dev board with basic functionality, single phase energy meter, RS485. One side pcb, for DIY makers easy to make at home conditions ;-)
+
+[EasyEDA project](https://oshwlab.com/dzurik.miroslav/esp32-devkit-evse)
+
+![ESP32DevkitC](https://github.com/dzurikmiroslav/esp32-evse/wiki/images/esp32devkitc.jpg)
+
+### ESP32-S2 EVSE DIY ALPHA
+
+ESP32-S2 based EVSE with advanced functionality, three phase energy meter, RS485, UART, 1WIRE, RCM, socket lock.
+
+[EasyEDA project](https://oshwlab.com/dzurik.miroslav/esp32s2-diy-evse)
+
+[Wiki page](https://github.com/dzurikmiroslav/esp32-evse/wiki/ESP32%E2%80%90S2-EVSE-DIY-ALPHA)
+
+![ESP32-S2-DA](https://github.com/dzurikmiroslav/esp32-evse/wiki/images/esp32s2da.jpg)
+
+Quick demonstration video
+
+[![Quick demonstration video](https://img.youtube.com/vi/r6YkWEet1aA/hqdefault.jpg)](https://www.youtube.com/shorts/r6YkWEet1aA)
+
+## Donations
+
+ESP32 EVSE firmware is free, but costs money to develop harware and time to develop software.
+This gift to the developer would demonstrate your appreciation of this software & hardware and help its future development.
+
+[![GitHub Sponsors](https://img.shields.io/badge/donate-GitHub_Sponsors-blue)](https://github.com/sponsors/dzurikmiroslav)
