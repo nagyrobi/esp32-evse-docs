@@ -4,7 +4,8 @@ description:  J1772 EVSE firmware for ESP32 based devices
 hide:
   - navigation
 ---
-![ESP32 EVSE](https://github.com/dzurikmiroslav/esp32-evse/wiki/images/logo-full.svg)
+![ESP32 EVSE](assets/logo-full.svg#only-light)
+![ESP32 EVSE](assets/logo-full-dark.svg#only-dark)
 
 J1772 EVSE firmware for ESP32 based devices.
 
