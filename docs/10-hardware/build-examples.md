@@ -31,7 +31,7 @@ If you find a broken Tesla Wall Connector GEN2, it's worth reviving it because i
 
 ![TWC2_revived](/images/twc2case_1.png)
 
-This box can accommodate [ESP32‐S2 EVSE DIY ALPHA](https://github.com/dzurikmiroslav/esp32-evse/wiki/ESP32%E2%80%90S2-EVSE-DIY-ALPHA) very well. It fits into the upper area of the box, while the contactor and the optional surge protector can go in the lower area. The mid space is just enough to host the RCM and the current transformers. 
+This box can accommodate [ESP32‐S2 EVSE DIY Alpha](esp32s2-evse-d-a.md) very well. It fits into the upper area of the box, while the contactor and the optional surge protector can go in the lower area. The mid space is just enough to host the RCM and the current transformers. 
 
 ![TWC2_revived](/images/twc2case_2.png)
 
