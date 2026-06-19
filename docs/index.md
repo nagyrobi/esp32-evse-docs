@@ -11,9 +11,9 @@ J1772 EVSE firmware for ESP32 based devices.
 
 ![Build with ESP-IDF](https://github.com/dzurikmiroslav/esp32-evse/workflows/Build/badge.svg)
 [![GitHub version](https://img.shields.io/github/release/dzurikmiroslav/esp32-evse.svg)](https://github.com/dzurikmiroslav/esp32-evse/releases/latest)
-[![License](https://img.shields.io/github/license/dzurikmiroslav/esp32-evse.svg)](LICENSE.md)
+[![License](https://img.shields.io/github/license/dzurikmiroslav/esp32-evse.svg)](20-software/LICENSE.md)
 [![GitHub Sponsors](https://img.shields.io/badge/donate-GitHub_Sponsors-blue)](https://github.com/sponsors/dzurikmiroslav)
-[![Web installer](https://img.shields.io/badge/web-installer-green?style=flat&logo=googlechrome&logoColor=lightgrey)](https://dzurikmiroslav.github.io/esp32-evse/web-installer)
+[![Web installer](https://img.shields.io/badge/web-installer-green?style=flat&logo=googlechrome&logoColor=lightgrey)](installer.md)
 
 ## Key features
  - Hardware abstraction for device design
@@ -80,29 +80,7 @@ Mobile dashboard page
 
 ![Dashboard mobile](images/web-dashboard-mobile.png)
 
-## Hardware
-
-### ESP32DevkitC EVSE
-
-Dev board with basic functionality, single phase energy meter, RS485. One side pcb, for DIY makers easy to make at home conditions ;-)
-
-[EasyEDA project](https://oshwlab.com/dzurik.miroslav/esp32-devkit-evse)
-
-![ESP32DevkitC](images/esp32devkitc.jpg)
-
-### ESP32-S2 EVSE DIY ALPHA
-
-ESP32-S2 based EVSE with advanced functionality, three phase energy meter, RS485, UART, 1WIRE, RCM, socket lock.
-
-[EasyEDA project](https://oshwlab.com/dzurik.miroslav/esp32s2-diy-evse)
-
-[Wiki page](https://github.com/dzurikmiroslav/esp32-evse/wiki/ESP32%E2%80%90S2-EVSE-DIY-ALPHA)
-
-![ESP32-S2-DA](images/esp32s2da.jpg)
-
-Quick demonstration video
-
-[![Quick demonstration video](https://img.youtube.com/vi/r6YkWEet1aA/hqdefault.jpg)](https://www.youtube.com/shorts/r6YkWEet1aA)
+Check out the [build examples page](10-hardware/build-examples.md) to see the hardware in action.
 
 ## Donations
 
