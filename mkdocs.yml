@@ -1,0 +1,77 @@
+site_name: ESP32-EVSE
+site_description: J1772 EVSE firmware for ESP32 based devices
+site_url: https://nagyrobi.github.io/esp32-evse-docs/
+repo_name: 'dzurikmiroslav/esp32-evse'
+repo_url: 'https://github.com/dzurikmiroslav/esp32-evse'
+edit_uri: 'https://nagyrobi.github.io/esp32-evse-docs/blob/master/docs/'
+docs_dir: docs
+theme:
+  name: material
+  logo: assets/esp32-evse.svg
+#  favicon: assets/be.ico
+  language: 'en'
+  custom_dir: docs/overrides
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: teal
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: teal
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+#    - navigation.tracking
+#    - navigation.expand
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - content.action.edit
+    - content.code.copy
+  icon:
+    admonition:
+      note: octicons/tag-16
+      info: octicons/info-16
+      warning: octicons/alert-16
+      danger: octicons/zap-16
+  font:
+#    text: Barlow
+    code: Roboto Mono
+extra:
+  social:
+    - icon: fontawesome/brands/patreon
+      link: 'https://github.com/sponsors/dzurikmiroslav'
+    - icon: fontawesome/brands/github
+      link: 'https://nagyrobi.github.io/esp32-evse-docs/'
+plugins:
+#  - offline
+  - search:
+      lang:
+        - en
+  - awesome-nav
+#  - minify:
+#      minify_html: true
+markdown_extensions:
+  - admonition
+  - toc:
+     permalink: "~"
+     toc_depth: 4
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.mark
+#  - def_list
+#  - attr_list
+#  - md_in_html
