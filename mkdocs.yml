@@ -52,7 +52,7 @@ extra:
     - icon: fontawesome/brands/github
       link: 'https://nagyrobi.github.io/esp32-evse-docs/'
 plugins:
-#  - offline
+  - offline
   - search:
       lang:
         - en
