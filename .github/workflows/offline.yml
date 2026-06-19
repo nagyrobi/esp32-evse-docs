@@ -30,8 +30,7 @@ jobs:
       - name: Install MkDocs
         run: |
           pip install mkdocs-material
-          # Add your other plugins here, for example:
-          # pip install mkdocs-awesome-nav
+          pip install mkdocs-awesome-nav
 
       - name: Build offline site
         run: |
