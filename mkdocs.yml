@@ -3,7 +3,7 @@ site_description: J1772 EVSE firmware for ESP32 based devices
 site_url: https://dzurikmiroslav.github.io/esp32-evse-docs/
 repo_name: 'dzurikmiroslav/esp32-evse'
 repo_url: 'https://github.com/dzurikmiroslav/esp32-evse'
-edit_uri: 'https://dzurikmiroslav.github.io/esp32-evse-docs/blob/master/docs/'
+edit_uri: 'https://github.com/dzurikmiroslav/esp32-evse-docs/blob/main/docs/'
 docs_dir: docs
 validation:
   links:
