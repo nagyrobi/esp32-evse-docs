@@ -1,3 +1,3 @@
-# esp32-evse-docs
+ESP32-EVSE documentation site
 
-Documentation site for ESP32-EVSE at https://github.com/dzurikmiroslav/esp32-evse
+https://nagyrobi.github.io/esp32-evse-docs/
