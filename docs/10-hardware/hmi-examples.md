@@ -21,5 +21,3 @@ This example relies on the [external ESPHome component](https://github.com/nagyr
 ![ESPHome](/images/hmi-esphome-lvgl.gif)
 
 This can be used not only for graphical displays. One may implement [just a LED strip with a pixel animation to suggest charging state](https://github.com/nagyrobi/esp32evse_esphome-lvgl/blob/main/esp32-evse_ledstrip_for_twc2.yaml).
-
-, 
