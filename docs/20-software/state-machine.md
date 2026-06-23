@@ -45,7 +45,8 @@ States **C** and **D** differ only in that **D** indicates the vehicle requests 
 
 ## The control loop
 
-![State Machine](/images/state_machine.png) 
+![State Machine](/images/state_machine_light.svg#only-light)
+![State Machine](/images/state_machine_dark.svg#only-dark)
 
 The state machine is evaluated periodically from the main loop, roughly every **50&nbsp;ms**. Each pass does the following:
 
