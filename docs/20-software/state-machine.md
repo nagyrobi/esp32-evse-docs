@@ -35,12 +35,17 @@ So `B1` means *vehicle connected, charging not yet permitted*, while `B2` means 
 
 \* When entering C1/D1 from a charging state the contactor is not opened immediately, see [Stopping charging gracefully](#stopping-charging-gracefully).
 
-States **C** and **D** differ only in that **D** indicates the vehicle requests *ventilated charging* (for vehicles with vented batteries). The firmware treats them identically except for the state label; whether D charging is actually allowed is a function of the installation, not the firmware.
+States **C** and **D** differ only in that **D** indicates the vehicle requests *ventilated charging* (according to the standard, outdoors chargers should continue charging; indoors (like garage) chargers should trigger a ventilation system of the area and only continue charging when that works). The firmware treats them identically except for the state label; whether **D** charging is actually allowed is a function of the installation, not the firmware.
+
+!!! note
+    The firmware supports Lua scripting. With the help of a script garage ventilation can be activated in state **D** (using an AUX GPIO output).
 
 !!! note
     Internally the firmware never stores `E` as a state. It keeps the "normal" state separately and reports `E` whenever any error bit is set. When all error bits are cleared the machine resumes from state **A**.
 
 ## The control loop
+
+![State Machine](images/state_machine.png) 
 
 The state machine is evaluated periodically from the main loop, roughly every **50&nbsp;ms**. Each pass does the following:
 
