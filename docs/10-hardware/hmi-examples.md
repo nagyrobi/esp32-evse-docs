@@ -16,7 +16,7 @@ For an advanced example of HMI built with a Nextion display check out the [esp32
 
 The [AT commands engine](../20-software/AT-Commands.md) can be used to communicate from other open source projects like ESPHome with ESP32-EVSE. 
 
-This example relies on the [external ESPHome component](https://github.com/nagyrobi/esp32evse-esphome) to integrate communication, and supports several display types. Check out the [esp32evse_esphome-lvgl](https://github.com/nagyrobi/esp32evse_esphome-lvgl) repository for details.
+This example relies on nagyrobi's [external ESPHome component](https://github.com/nagyrobi/esp32evse-esphome) to integrate communication, and supports several display types. Check out his [esp32evse_esphome-lvgl](https://github.com/nagyrobi/esp32evse_esphome-lvgl) repository for details.
 
 ![ESPHome](/images/hmi-esphome-lvgl.gif)
 
