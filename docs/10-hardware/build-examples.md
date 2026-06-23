@@ -2,6 +2,8 @@
 title: Build examples
 ---
 
+Below is a list of possible hardware implementations of ESP32-EVSE.
+
 ## ESP32DevkitC EVSE
 
 Relying on a DEV board with basic functionality, such as single phase energy meter, RS485. One side PCB, discrete components, easier to assemble for DIY makers ;-)

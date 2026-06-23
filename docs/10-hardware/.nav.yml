@@ -10,3 +10,4 @@ nav:
   - esp32s2-evse-d-a.md
   - "*"
   - build-examples.md
+  - hmi-examples.md
