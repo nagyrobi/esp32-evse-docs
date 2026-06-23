@@ -15,6 +15,23 @@ J1772 EVSE firmware for ESP32 based devices.
 [![GitHub Sponsors](https://img.shields.io/badge/donate-GitHub_Sponsors-blue)](https://github.com/sponsors/dzurikmiroslav)
 [![Web installer](https://img.shields.io/badge/web-installer-green?style=flat&logo=googlechrome&logoColor=lightgrey)](installer.md)
 
+## What it does
+
+An **EVSE** (Electric Vehicle Supply Equipment) is the equipment between the AC mains and an electric vehicle &ndash; what most people call the "charger". For AC charging the conversion to DC happens in the vehicle's onboard charger; the EVSE's job is to **supervise and control the supply safely**: confirm a vehicle is properly connected, tell it how much current it may draw, switch the mains on and off through a contactor, and shut down on a fault.
+
+This project is firmware that turns an **ESP32-based board into a fully featured AC EVSE** following the **SAE J1772 / IEC 61851-1** standard. On top of the core charging control it adds the features expected of a modern wallbox &ndash; energy metering, charging limits, access control, a responsive web interface, over-the-air updates, and a range of integration interfaces (REST, [Modbus](20-software/Modbus.md), [Lua scripting](20-software/Lua.md), [Nextion HMI](20-software/Nextion.md), [AT commands](20-software/AT-Commands.md)). See the full list under [Key features](#key-features).
+
+## How it works
+
+The charger and the vehicle communicate over two signalling lines defined by the standard:
+
+- The **[Control Pilot](10-hardware/control-pilot.md)** carries a 1&nbsp;kHz ±12&nbsp;V signal. Its duty cycle tells the vehicle how much current it may draw, and the vehicle answers by changing the voltage to signal that it is connected, ready, or charging.
+- The **[Proximity Pilot](10-hardware/proximity-pilot.md)** codes the current rating of a detachable cable, so the charger never offers more current than the cable can carry.
+
+A **[state machine](20-software/state-machine.md)** sits on top of these signals. It reads the Control Pilot, decides when charging is permitted, closes the AC contactor to energize the vehicle, supervises energy metering and protections (residual current, temperature, [socket lock](10-hardware/socket-lock.md)), and returns to a safe state on any fault. Optional [limits and gates](20-software/charging-control.md) &ndash; consumption, time, authorization, tariff enable &ndash; let it match a real installation.
+
+The firmware is written in ESP-IDF and is **not tied to any particular board**: all the hardware details live in a separate configuration file, so the same binary runs on many designs. The [Architecture](20-software/architecture.md) page describes how the pieces fit together, and the [Device definition method](#device-definition-method) below explains the configuration approach.
+
 ## Key features
  - Hardware abstraction for device design
  - Responsive web-interface
