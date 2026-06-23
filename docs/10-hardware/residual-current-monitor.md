@@ -10,7 +10,7 @@ By integrating an RCM that can sense DC residual current, a charger can provide 
 
 ## How it works
 
-The board uses an RCM module (for example RCM14-01 / RCM14-03) that exposes two signals: a **trigger output** that asserts when residual current exceeds the module's threshold, and a **test input** that forces an internal fault so the device can be verified.
+The board uses an RCM module (currently supported models are [RCM14-01](https://www.westernautomation.com/wp-content/uploads/2022/05/WA-DS-014-RCM14-01-Rev-C-3.pdf) / [RCM14-03](https://www.westernautomation.com/wp-content/uploads/2022/05/WA-DS-015-RCM14-03-Rev-C-3.pdf)) that exposes two signals: a **trigger output** that asserts when residual current exceeds the module's threshold, and a **test input** that forces an internal fault so the device can be verified.
 
 - **Trip.** While the RCM is enabled, the firmware watches the trigger line. If it asserts, an `RCM_TRIGGERED` error is raised and the charger goes to state **E**, opening the contactor.
 - **Self-test.** At the start of every charging session the firmware exercises the RCM through its test input. If the module does not respond as expected, an `RCM_SELFTEST_FAULT` error is raised. This confirms the protection is working *before* energizing the vehicle, rather than trusting it blindly.
