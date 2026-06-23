@@ -2,16 +2,19 @@
 title: Nextion display reference
 ---
 
-Controller provide Nextion API that is universal (not strictly define pages or components placement on pages).
+The firmware provides a Nextion API that is universal (it doesn't strictly define pages or components placement on pages).
 
-Nextion API can be set in serial settings, any serial interface can be operating in Nextion API mode. Only one interface can work in Nextion API mode!
+Nextion API can be set in serial settings, any serial interface can be operating in Nextion API mode. 
 
-Commands can be send from Nextion Display to controller, must be terminated with `0xFF 0xFF 0xFF`. In Nextion editor set encoding to UTF-8.
+!!! note
+    Only one interface can work in Nextion API mode!
+
+Commands can be sent from Nextion Display to controller, and must be terminated with `0xFF 0xFF 0xFF`. In Nextion editor set encoding to UTF-8.
 
 Before connecting Nextion display to controller check display datasheet for Output High Voltage.
-Intelligent series has 5V TX, but ESP32 is only 3V3 tolerant! If board design not contains logic level converter, use external voltatage divider.
+**Intelligent series** has 5V TX, but ESP32 supports only 3,3V (5V tolerant)! If the board design does not contain a logic level converter, use external voltatage divider.
 
-## Table of commands
+## Commands
 
 | Command            | Description                                 |
 | ------------------ | ------------------------------------------- |
@@ -27,9 +30,9 @@ Intelligent series has 5V TX, but ESP32 is only 3V3 tolerant! If board design no
 | auth               | Authorize to start charging when is pending |
 | reboot             | Reboot                                      |
 
-To access variable in Nextion display, must be defined component with objname (variable, text, number, dual-state button, slider, etc.) from following table. To receive variable value from controller, subscribe to variable with `sub` command.
+To access variables in Nextion display, they must be defined as component with objname (variable, text, number, dual-state button, slider, etc.) from following table. To receive variable value from ESP32-EVSE, subscribe to variable with `sub` command.
 
-## Table of variables
+## Variables
 
 | Variable     | Description                                                                                              | Type   |
 | ------------ | -------------------------------------------------------------------------------------------------------- | ------ |
@@ -70,9 +73,9 @@ To access variable in Nextion display, must be defined component with objname (v
 
 ## Simple example
 
-_Controlling charging current and charging enabled_
+### Controlling charging current and charging enabled
 
-Define dual-state button with objname `en`, slider with objname `chCur` and string variable with objname `str`. 
+Define a dual-state button with objname `en`, slider with objname `chCur` and string variable with objname `str`. 
 
 Set page preinitialize event:
 
@@ -86,4 +89,6 @@ Set dual-state button touch press event:
 
 ![Slider touch release event](/images/nxeditor-button.png)
 
-For advanced Nextion HMI visit https://github.com/dzurikmiroslav/esp32-evse-nextion
+## Advanced example
+
+For an advanced example of HMI built with a Nextion display check out the [esp32-evse-nextion](https://github.com/dzurikmiroslav/esp32-evse-nextion) repository.
