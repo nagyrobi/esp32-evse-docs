@@ -117,11 +117,9 @@ For the full description of the locking sequence, detection, retries and fault h
 
 Notes about the [onboard enegry meter](energy-metering.md) functionality:
 
-L1, L2, L3 connections onboard charging voltage meter, they are optional. Use 30mA fuses to connect them to the lines.
-
-CT1, CT2, CT3 connections for current transformers measuring charging current, they are optional. Can be used any with ratio 2000/1 (for example: DL-CT08CL5 or SCT-013-000). 
-
-Remember to check `Energy meter` checkbox `Three phases` in case your installation is relying on a three-phase connection.
+- **L1**, **L2**, **L3** connections onboard charging voltage meter, they are optional. Use `30mA` fuses to connect them to the lines.
+- **CT1**, **CT2**, **CT3** connections for current transformers measuring charging current, they are optional. Can be used any with ratio 2000/1 (for example: `DL-CT08CL5` or `SCT-013-000`). 
+- Remember to check **Energy meter** checkbox **Three phases** in case your installation is relying on a three-phase connection.
 
 [Residual Current Monitor](residual-current-monitor.md) is optional, if is not available it must be disabled in settings.
 
@@ -129,10 +127,10 @@ Remember to check `Energy meter` checkbox `Three phases` in case your installati
 
 ![Wiring socket outlet](/images/esp32s2da-wiring-lock.png)
 
-Set `Max charging current` to the value of the circuit breaker that protects the EVSE.
+Set **Max charging current** to the value of the circuit breaker that protects the EVSE.
 
 ### With fixed cable
 
 ![Wiring fixed cable](/images/esp32s2da-wiring-cable.png)
 
-Set `Max charging current` to the lower value of the circuit breaker that protects the EVSE or cable maximum current.
+Set **Max charging current** to the lower value of the circuit breaker that protects the EVSE or cable maximum current.
