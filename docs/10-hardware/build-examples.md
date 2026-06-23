@@ -14,16 +14,27 @@ You can order the PCB from the [EasyEDA project](https://oshwlab.com/dzurik.miro
 
 ## Standard electrical box
 
-[ESP32-S2 EVSE DIY Alpha](esp32s2-evse-d-a.md) placed in standard plastic electrical box (300x400x200mm). Based on connection with socket outlet with additional features:
+[ESP32-S2 EVSE DIY Alpha](esp32s2-evse-d-a.md) is meant to be reproduced by hand, the board favours discrete, through-hole components over dense surface-mount packages. The EasyEDA / OSHWLab listing publishes the complete schematic and PCB under GPL-3.0, and although it can be ordered pre-assembled, the through-hole approach is a deliberate choice that lets an individual builder populate, inspect and repair the board without specialised equipment. For a safety-relevant device that switches mains and monitors residual current, that openness and serviceability matter as much as the feature set.
+
+- **Hand assembly with basic tools.** Through-hole resistors, capacitors, leaded semiconductors, the relay and screw terminals can all be soldered with an ordinary temperature-controlled iron. There is no need for solder paste, a stencil, a reflow oven or a hot-air station, and no fine-pitch or leadless (QFN/BGA) parts that demand a microscope and rework skills.
+- **Easy sourcing and substitution.** Common through-hole parts are stocked by every distributor and tolerate substitution, so a build is not tied to a single reel or one supplier&rsquo;s exact part number. That keeps the design reproducible and repairable years later.
+- **Mechanical robustness.** Leaded parts and screw terminals are anchored in plated through-holes, so connectors, the relay and the terminals withstand vibration, thermal cycling and the mechanical stress of field wiring far better than components held only by surface pads.
+- **Room for mains creepage and clearance.** The larger footprints and wider pad spacing of through-hole parts make it easier to keep the safety distances an AC mains device requires and to physically separate the high-voltage section from the logic.
+- **Inspectable and probeable.** Every joint and component value is visible and reachable. You can clip a scope probe or meter onto a lead, lift a pin or tack on a wire without special tooling &ndash; valuable both for an experimental &ldquo;Alpha&rdquo; design and for verifying a board that handles mains.
+- **Easier heat handling.** Leaded power parts and regulators shed heat and accept heatsinks more readily than small surface-mount packages.
+
+The trade-offs are the familiar ones: the board is physically larger, takes longer to populate by hand, and is not what you would pick for high-volume production. For a one-off, openly published charging controller that a competent builder assembles, inspects and maintains, those costs are well spent.
+
+Placed in standard plastic electrical box (300x400x200mm); based on connection with socket outlet with additional features:
 
 * Low tariff enable input
 * RCM
 * Nextion display NX4827P043-011C-Y
 * Dragino LoraWAN module
 
-Quick demonstration video
-
 ![Wallbox](/images/esp32s2da-wallbox.jpg)
+
+Quick demonstration video: 
 
 [![Quick demonstration video](https://img.youtube.com/vi/r6YkWEet1aA/hqdefault.jpg)](https://www.youtube.com/shorts/r6YkWEet1aA)
 
