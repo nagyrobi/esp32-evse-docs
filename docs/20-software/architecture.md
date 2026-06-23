@@ -13,7 +13,7 @@ A central idea of the project is the **hardware abstraction**: the firmware bina
 The most relevant components are:
 
 | Component | Responsibility |
-| --------- | -------------- |
+| ------------ | -------------- |
 | `evse` | The charging [state machine](state-machine.md) and the high-level charging settings |
 | `peripherals` | Hardware drivers: control pilot, proximity, AC relay, socket lock, energy meter, RCM, temperature, LEDs, auxiliary IO |
 | `config` | Loads and validates `board.yaml`, exposes the board configuration to the rest of the firmware |
