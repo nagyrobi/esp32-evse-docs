@@ -427,7 +427,7 @@ Read/write ESP32-EVSE charging enabled setting.
 
 | Parameter  | Access | Type  | Description                 |
 | ---------- | ------ | ----- | --------------------------- |
-| `<enable>` | RW     | uint8 | Is enabled charger (0 or 1) |
+| `<enable>` | RW     | uint8 | Charger enabled  (0 or 1)   |
 
 Example:
 
@@ -452,7 +452,7 @@ Read/write ESP32-EVSE charging available setting (F state).
 
 | Parameter     | Access | Type  | Description                   |
 | ------------- | ------ | ----- | ----------------------------- |
-| `<available>` | RW     | uint8 | Is available charger (0 or 1) |
+| `<available>` | RW     | uint8 | Charger available (0 or 1)    |
 
 Example:
 
@@ -463,7 +463,7 @@ OK
 ```
 
 !!! note
-    When ESP32-EVSE is set to be `available=0` it doesn't mean that state will always be F. Error can override the state to E.
+    When ESP32-EVSE is set to be `available=0` it doesn't mean that state will always be `F`. Error can override the state to `E`.
 
 ### AT+REQAUTH
 
@@ -477,7 +477,7 @@ Read/write ESP32-EVSE require authorization option before starting to charge.
 
 | Parameter        | Access | Type  | Description                        |
 | ---------------- | ------ | ----- | ---------------------------------- |
-| `<require_auth>` | RW     | uint8 | Is required authorization (0 or 1) |
+| `<require_auth>` | RW     | uint8 | Authorization required (0 or 1)    |
 
 Example:
 
@@ -499,7 +499,7 @@ Print the state of the ESP32-EVSE pending authorization bit.
 
 | Parameter        | Access | Type  | Description                       |
 | ---------------- | ------ | ----- | --------------------------------- |
-| `<pending_auth>` | RO     | uint8 | Is pending authorization (0 or 1) |
+| `<pending_auth>` | RO     | uint8 | Authorization pending (0 or 1)    |
 
 Example:
 
