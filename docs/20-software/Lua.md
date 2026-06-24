@@ -6,7 +6,7 @@ Script capability allows custom functionality of controller, is based on [Lua](h
 
 Script settings are in web interface, when you can enable/disable this feature and browsing print output. 
 In Files web interface, you can edit Lua sources. At startup file `/usr/lua/init.lua` (or `/usr/lua/init.luac` if it's provided) will be executed.
-Lua sources also can be edited through WebDAV, just open in file browser url: `dav://<IP>/dav/usr/`. I recommended this way, because you can use favorite Lua IDE...
+Lua sources also can be edited through WebDAV, just open in file browser url: `dav://<device-ip>/dav/usr/`.
 
 In addition to the standard Lua functionality, additional EVSE-specific modules are available to control the charging controller.
 

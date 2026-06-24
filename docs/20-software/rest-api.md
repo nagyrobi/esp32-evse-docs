@@ -574,7 +574,7 @@ optional `?index=<n>` for incremental reads (same scheme as
 panic/crash log as plain text with an `X-Time` header (timestamp of the panic);
 `DELETE /log/panic` clears it.
 
-## Related: WebDAV file access
+## WebDAV file access
 
 Script files and other contents of the device filesystem are **not** served
 through this REST API. They are exposed over **WebDAV** on the same server,
@@ -595,14 +595,6 @@ you can edit Lua scripts in place.
     network can read, upload, overwrite or delete files under `/dav/`
     (including Lua scripts), even when credentials are configured. Keep the
     device on a trusted network.
-
-!!! note
-    This page replaces the old OpenAPI sketch. It is written against the current
-    firmware (the `protocols` component, REST handlers in `http_rest.c` /
-    `http_json.c`). The earlier document still mentioned MQTT and the TCP logger;
-    both were removed, and the API was reorganised in the v1.1.0 *WebUI & REST
-    api refactoring*. The endpoints, field names and value ranges below reflect
-    the refactored API.
 
 ## See also
 
