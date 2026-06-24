@@ -7,7 +7,7 @@ Controller support ModBUS server (slave) over TCP/IP and RTU/serial.
 In the web interface, ModBUS TCP server can be enabled/disabled and set a Unit ID.
 ModBUS TCP is listening on port `502`.
 
-![ModBUS settings](/images/web-settings-Modbus.png "ModBUS settings")
+![ModBUS settings](/images/web-settings-modbus.png "ModBUS settings")
 
 ModBUS RTU can be set in serial settings, any serial interface (UART, RS-485) can be operating in ModBUS slave mode.
 
