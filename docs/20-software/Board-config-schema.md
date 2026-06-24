@@ -349,12 +349,12 @@ serials:
 
 ### `onewire`
 
-A 1-Wire bus, currently used for a temperature sensor.
+A 1-Wire bus, currently used for temperature sensors.
 
 | Field | Type | Required | Notes |
 | ----- | ---- | :------: | ----- |
 | `gpio` | integer | ✅ | 1-Wire data GPIO |
-| `temperatureSensor` | boolean | ✅ | Whether a temperature sensor is present on the bus |
+| `temperatureSensor` | boolean | ✅ | Whether temperature sensors are present on the bus |
 
 ```yaml
 onewire:
@@ -364,162 +364,7 @@ onewire:
 
 ## Complete examples
 
-### Minimal single-phase board (ESP32-DevKitC)
-
-LEDs, button, pilot, proximity, a single-phase current+voltage meter, three
-serial ports, a 1-Wire temperature sensor and one OTA channel. No socket lock or
-RCM (fixed-cable style).
-
-```yaml
-# yaml-language-server: $schema=https://github.com/dzurikmiroslav/esp32-evse/raw/refs/heads/master/board-config/board-config-schema-1.json
-
-deviceName: ESP32-DevKitC EVSE
-
-leds:
-  charging:
-    gpio: 19
-  error:
-    gpio: 18
-  wifi:
-    gpio: 17
-
-button:
-  gpio: 0
-
-pilot:
-  gpio: 27
-  adcChannel: 0
-  levels: [2405, 2099, 1792, 1484, 728]
-
-proximity:
-  adcChannel: 3
-  levels: [1650, 820, 430]
-
-acRelay:
-  gpios: [26]
-
-energyMeter:
-  current:
-    adcChannels: [7]
-    scale: 0.090909091
-  voltage:
-    adcChannels: [6]
-    scale: 0.47
-
-serials:
-  - type: uart
-    name: UART via USB
-    rxdGpio: 3
-    txdGpio: 1
-  - type: rs485
-    name: RS485
-    rxdGpio: 32
-    txdGpio: 25
-    rtsGpio: 33
-  - type: uart
-    name: UART
-    rxdGpio: 2
-    txdGpio: 15
-
-onewire:
-  gpio: 16
-  temperatureSensor: true
-
-ota:
-  channels:
-    - name: stable
-      path: https://dzurikmiroslav.github.io/esp32-evse/ota/stable/esp32.json
-```
-
-### Full three-phase board (ESP32-S2-DA)
-
-Adds a socket lock, RCM, three-phase current+voltage metering and auxiliary IO.
-
-```yaml
-# yaml-language-server: $schema=https://github.com/dzurikmiroslav/esp32-evse/raw/refs/heads/master/board-config/board-config-schema-1.json
-
-deviceName: ESP32-S2-DA EVSE
-
-leds:
-  charging:
-    gpio: 36
-  error:
-    gpio: 37
-  wifi:
-    gpio: 35
-
-button:
-  gpio: 0
-
-pilot:
-  gpio: 33
-  adcChannel: 3
-  levels: [2405, 2099, 1792, 1484, 728]
-
-proximity:
-  adcChannel: 2
-  levels: [1650, 820, 430]
-
-acRelay:
-  gpios: [21]
-
-socketLock:
-  gpios: [20, 19]
-  detectionGpio: 34
-  detectionDelay: 1000
-  minBreakTime: 1000
-
-rcm:
-  gpio: 41
-  testGpio: 26
-
-energyMeter:
-  current:
-    adcChannels: [4, 5, 6]
-    scale: 0.090909091
-  voltage:
-    adcChannels: [7, 8, 9]
-    scale: 0.47
-
-aux:
-  inputs:
-    - name: IN1
-      gpio: 11
-    - name: IN2
-      gpio: 2
-  outputs:
-    - name: OUT1
-      gpio: 17
-    - name: OUT2
-      gpio: 16
-    - name: OUT3
-      gpio: 15
-    - name: OUT4
-      gpio: 14
-  analogInputs:
-    - name: IN3
-      adcChannel: 0
-
-serials:
-  - type: uart
-    name: UART
-    rxdGpio: 12
-    txdGpio: 13
-  - type: rs485
-    name: RS-485
-    rxdGpio: 40
-    txdGpio: 38
-    rtsGpio: 39
-
-onewire:
-  gpio: 42
-  temperatureSensor: true
-
-ota:
-  channels:
-    - name: stable
-      path: https://dzurikmiroslav.github.io/esp32-evse/ota/stable/esp32s2.json
-```
+Check out the [source repository](https://github.com/dzurikmiroslav/esp32-evse/tree/master/board-config) for actual examples.
 
 ## See also
 
