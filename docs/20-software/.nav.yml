@@ -8,7 +8,6 @@ nav:
   - Lua.md
   - Nextion.md
   - AT-Commands.md
-  - openapi.md
   - Board-config-schema.md
   - "*"
   - LICENSE.md
