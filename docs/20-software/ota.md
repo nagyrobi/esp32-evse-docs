@@ -78,7 +78,7 @@ If you self-host a channel, serve a descriptor in this shape and point a
 OTA only replaces the application image. Some releases also change things outside
 the app slot — the **partition table**, or the **`board.yaml` format**. Those
 cannot be delivered by OTA and require a **full flash over USB** with the
-[web installer](https://dzurikmiroslav.github.io/esp32-evse/web-installer), after
+[web installer](https://dzurikmiroslav.github.io/esp32-evse-docs/installer/), after
 which the `board.yaml` may need to be recreated in the new format. The release
 notes call this out when it applies, so check them before a major version jump.
 
@@ -90,5 +90,5 @@ notes call this out when it applies, so check them before a major version jump.
 ## See also
 
 - [Board configuration schema → `ota`](board-config-schema.md#ota) — defining channels
-- [Web installer](https://dzurikmiroslav.github.io/esp32-evse/web-installer) — initial install and full reflash
+- [Web installer](https://dzurikmiroslav.github.io/esp32-evse-docs/installer/) — initial install and full reflash
 
