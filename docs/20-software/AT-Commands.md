@@ -79,7 +79,7 @@ Subscribe to periodic response to other commands, let ESP32-EVSE send responses 
 
 Example:
 
-```
+```at
 AT+SUB="+ENABLE",1000
 OK
 AT+SUB="+AVAILABLE",2000
