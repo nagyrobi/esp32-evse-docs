@@ -13,6 +13,8 @@ Because every rule is keyed to the wall-clock time, the scheduler is only useful
 once the device knows the correct time — either from [NTP](#time-and-ntp) or set
 manually.
 
+![Scheduler](/images/scheduler.png)
+
 ## How it works
 
 Each rule (a *schedule*) pairs one **action** with a weekly pattern of **active
@@ -80,19 +82,20 @@ So a value is the sum of `2^h` for every active hour:
 Worked example for the night window: hours 0–5 contribute `2^0+…+2^5 = 63`, and
 hours 22–23 contribute `2^22 + 2^23 = 12582912`; together `12582975`.
 
-??? note "Hour → bit value reference"
-    | Hour | Value | Hour | Value | Hour | Value |
-    | ---- | ----- | ---- | ----- | ---- | ----- |
-    | 0 | 1 | 8 | 256 | 16 | 65536 |
-    | 1 | 2 | 9 | 512 | 17 | 131072 |
-    | 2 | 4 | 10 | 1024 | 18 | 262144 |
-    | 3 | 8 | 11 | 2048 | 19 | 524288 |
-    | 4 | 16 | 12 | 4096 | 20 | 1048576 |
-    | 5 | 32 | 13 | 8192 | 21 | 2097152 |
-    | 6 | 64 | 14 | 16384 | 22 | 4194304 |
-    | 7 | 128 | 15 | 32768 | 23 | 8388608 |
+### Hour → bit value reference
 
-    Add the values for the hours you want active to get the weekday mask.
+| Hour | Value | Hour | Value | Hour | Value |
+| ---- | ----- | ---- | ----- | ---- | ----- |
+| 0 | 1 | 8 | 256 | 16 | 65536 |
+| 1 | 2 | 9 | 512 | 17 | 131072 |
+| 2 | 4 | 10 | 1024 | 18 | 262144 |
+| 3 | 8 | 11 | 2048 | 19 | 524288 |
+| 4 | 16 | 12 | 4096 | 20 | 1048576 |
+| 5 | 32 | 13 | 8192 | 21 | 2097152 |
+| 6 | 64 | 14 | 16384 | 22 | 4194304 |
+| 7 | 128 | 15 | 32768 | 23 | 8388608 |
+
+Add the values for the hours you want active to get the weekday mask.
 
 ## Time and NTP
 
