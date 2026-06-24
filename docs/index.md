@@ -38,7 +38,7 @@ The firmware is written in ESP-IDF and is **not tied to any particular board**: 
  - OTA update
  - [Integrated energy meter](10-hardware/energy-metering.md)
  - [Modbus](20-software/Modbus.md) (RTU and TCP)
- - [LUA scripting](20-software/Lua.md)
+ - [LUA scripting](20-software/Lua.md) (allowing local automations and further integration with MQTT)
  - [Nextion HMI](20-software/Nextion.md)
  - [AT commands](20-software/AT-Commands.md) (third party HMI or systems integration)
  - [REST API / WebDAV](20-software/rest-api.md)
