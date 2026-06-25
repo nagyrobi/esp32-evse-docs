@@ -271,7 +271,7 @@ return {
 
 ## EVCC
 
-Here's a mapping between ESP32-EVSE REST Api and EVCC. Replace `EVSE_IP` with your charger's address:
+Here's a mapping between [REST API](rest-api.md) and EVCC. Replace `EVSE_IP` with your charger's address:
 
 ```yaml
 chargers:
