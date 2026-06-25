@@ -452,7 +452,7 @@ return {
 
 ### Home Assistant MQTT with autodiscovery
 
-The script publishes the charger state, power, session energy, temperature, the set charging current values as MQTT topics,
+The script publishes the charger state, power, session energy, temperature, error states as MQTT topics,
 and accepts commands to enable/disable charging and to set the charging current. Optionally announces everything
 to Home Assistant via MQTT discovery so the entities appear automatically.
 
@@ -546,13 +546,9 @@ return {
                 name = "Power", state_topic = state_topic,
                 value_template = "{{ value_json.power }}",
                 unit_of_measurement = "W", device_class = "power", state_class = "measurement" })
-            disco("sensor", "charging_current", {
-                name = "Charging current", state_topic = state_topic,
-                value_template = "{{ value_json.current }}",
-                unit_of_measurement = "A", device_class = "current", state_class = "measurement" })
             disco("sensor", "session_energy", {
                 name = "Session energy", state_topic = state_topic,
-                value_template = "{{ value_json.session }}",
+                value_template = "{{ value_json.session_energy }}",
                 unit_of_measurement = "Wh", device_class = "energy", state_class = "total_increasing" })
             disco("sensor", "temperature", {
                 name = "Temperature", state_topic = state_topic,
@@ -568,12 +564,12 @@ return {
                 payload_on = "ON", payload_off = "OFF", device_class = "problem" })
             disco("switch", "charging_enabled", {
                 name = "Charging enabled", state_topic = state_topic,
-                value_template = "{{ 'ON' if value_json.enabled else 'OFF' }}",
+                value_template = "{{ 'ON' if value_json.enabled else 'OFF' }}", icon = "mdi:ev-plug-type2",
                 command_topic = id .. "/enabled/set",
                 payload_on = "ON", payload_off = "OFF", state_on = "ON", state_off = "OFF" })
             disco("number", "charging_current_limit", {
                 name = "Charging current limit", state_topic = state_topic,
-                value_template = "{{ value_json.current }}",
+                value_template = "{{ value_json.current }}", icon = "mdi:current-ac",
                 command_topic = id .. "/current/set",
                 min = 6, max = evse.getmaxchargingcurrent(), step = 1,
                 unit_of_measurement = "A", mode = "slider" })
@@ -595,7 +591,6 @@ return {
 
                 local methods = {
                     enabled = function() evse.setenabled(truthy(data)) end,
-                    available = function() evse.setavailable(truthy(data)) end,
                     current = function()
                         local amps = tonumber(data)
                         if amps then
@@ -613,14 +608,12 @@ return {
                 local state = evse.getstate()
                 local payload = {}
                 payload.state = STATE_NAMES[state] or "?"
-                payload.connected = state >= evse.STATEB1 and state <= evse.STATED2
                 payload.charging = state == evse.STATEC2 or state == evse.STATED2
                 payload.enabled = evse.getenabled()
-                payload.available = evse.getavailable()
                 payload.error = evse.geterror() > 0
                 payload.power = energymeter.getpower()
                 payload.current = evse.getchargingcurrent()
-                payload.session = energymeter.getconsumption()
+                payload.session_energy = energymeter.getconsumption()
                 payload.temperature = evse.gethightemperature()
 
                 client:publish(state_topic, json.encode(payload), 0, 1) -- retained
