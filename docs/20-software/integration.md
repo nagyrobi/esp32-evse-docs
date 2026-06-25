@@ -2,11 +2,11 @@
 title: Integration examples
 ---
 
-## Home Assistant with autodiscovery
+## Home Assistant 
 
 Use a [LUA Script](Lua.md) to publish the charger state, power, session energy, temperature, error states as MQTT topics,
 and accept commands to enable/disable charging and to set the charging current. Optionally announce everything
-to Home Assistant via MQTT discovery so the entities appear automatically.
+to Home Assistant via MQTT autodiscovery so the entities appear automatically.
 
 Set the values in the script directly overwriting the defaults or from the web UI: Scripting -> components -> "MQTT bridge to Home Assistant". 
 
@@ -357,7 +357,7 @@ loadpoints:
 
 The [AT commands engine](AT-Commands.md) can be used to communicate from other open source projects like ESPHome with ESP32-EVSE. 
 
-The [external ESPHome component](https://github.com/nagyrobi/esp32evse-esphome) implements accessing most EVSE parameters as ESPHome
+This [external ESPHome component](https://github.com/nagyrobi/esp32evse-esphome) implements accessing most EVSE parameters as ESPHome
 sensors, binary sensors, text sensors, switches, buttons, number inputs. These can appear in ESPHome and Home Assistant as native components.
 
 It is intended to be used on a separate ESP32 microcontroller connected to ESP32-EVSE thorugh an UART. The biggest advantage here is that
