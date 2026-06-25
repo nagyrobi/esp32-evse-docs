@@ -4,10 +4,10 @@ nav:
   - architecture.md
   - state-machine.md
   - charging-control.md
+  - Board-config-schema.md
   - Modbus.md
-  - Lua.md
   - Nextion.md
   - AT-Commands.md
-  - Board-config-schema.md
   - "*"
+  - integration.md
   - LICENSE.md
