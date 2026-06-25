@@ -366,12 +366,13 @@ functionality can run separately without generating extra load on the charger.
 
 ## The Things Network (LoRaWAN)
 
-Communication over LoRaWAN network, using a Dragino RS485-LN (ModBUS to LoRaWAN Converter). 
+Communication over LoRaWAN network, using a **Dragino RS485-LN** (ModBUS to LoRaWAN Converter). 
 
 Set RS-485 serial interface type for ModBUS mode, and default parameters for Dragino are: baud rate: 9600, data bits: 8, stop bits: 1, parity: disable.
-(You can set your own configuration parameters, but don't forget to set equal: AT+BAUDR, AT+PARITY, AT+DATABIT, AT+STOPBIT settings)
 
-### Dragino configuration
+**Dragino configuration**
+
+Serial port parameters: `AT+BAUDR`, `AT+PARITY`, `AT+DATABIT`, `AT+STOPBIT` commands.
 
 ```AT
 AT+TDC=60000
@@ -399,7 +400,7 @@ AT+DATACUT4=13,2,4~7+10~11
 AT+CMDDL4=0
 ```
 
-### The Things Network
+**The Things Network**
 
 After sucesffuly adding Dragino to your app, set JavaScript payload decoder:
 
@@ -447,7 +448,7 @@ function decodeUplink(input) {
 }
 ```
 
-After setup, you should see live data in TTN console like this:
+After setup, you should see live data in TTN console:
 
 ![TTN live data](/images/ttn-live-data.png "TTN live data")
 
