@@ -1,0 +1,6625 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="J1772 EVSE firmware for ESP32 based devices">
+      
+      
+      
+        <link rel="canonical" href="https://dzurikmiroslav.github.io/esp32-evse-docs/20-software/AT-Commands/">
+      
+      
+        <link rel="prev" href="../Nextion/">
+      
+      
+        <link rel="next" href="../Lua/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/esp32-evse.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>AT Commands reference - ESP32-EVSE</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#basic-commands" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ESP32-EVSE" class="md-header__button md-logo" aria-label="ESP32-EVSE" data-md-component="logo">
+      
+  <img src="../../assets/esp32-evse.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ESP32-EVSE
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AT Commands reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dzurikmiroslav/esp32-evse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dzurikmiroslav/esp32-evse
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Welcome
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10-hardware/control-pilot/" class="md-tabs__link">
+          
+  
+  
+  Hardware
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../architecture/" class="md-tabs__link">
+          
+  
+  
+  Software
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../installer/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Web Installer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contributing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ESP32-EVSE" class="md-nav__button md-logo" aria-label="ESP32-EVSE" data-md-component="logo">
+      
+  <img src="../../assets/esp32-evse.svg" alt="logo">
+
+    </a>
+    ESP32-EVSE
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dzurikmiroslav/esp32-evse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dzurikmiroslav/esp32-evse
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-hardware/control-pilot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control Pilot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-hardware/proximity-pilot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proximity Pilot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-hardware/socket-lock/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Socket lock
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-hardware/residual-current-monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Residual current monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-hardware/energy-metering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy metering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-hardware/CP-calibration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control Pilot calibration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-hardware/esp32s2-evse-d-a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP32-S2 EVSE DIY Alpha
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-hardware/build-examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-hardware/hmi-examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HMI examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state-machine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State machine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../charging-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Charging control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Board-config-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Board configuration schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Modbus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModBUS reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Nextion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nextion display reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AT Commands reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AT Commands reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ATE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atcmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CMD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SUB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atunsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+UNSUB
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atrst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+RST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atuptime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+UPTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atchip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CHIP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atheap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+HEAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+VER
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atidfver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+IDFVER
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atbuildtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+BUILDTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attemp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TEMP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TZ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attzrule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TZRULE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evse-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EVSE commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EVSE commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+STATE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aterror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+ERROR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atenable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+ENABLE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atavailable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AVAILABLE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atreqauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+REQAUTH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atpendauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+PENDAUTH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AUTH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atchcur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CHCUR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atdefchcur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEFCHCUR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atmaxchcur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+MAXCHCUR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atconsumlim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CONSUMLIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atdefconsumlim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEFCONSUMLIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atchtimelim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CHTIMELIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atdefchtimelim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEFCHTIMELIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atunderpowerlim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+UNDERPOWERLIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atdefunderpowerlim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEFUNDERPOWERLIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atlimreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+LIMREACH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atsocketoutlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SOCKETOUTLET
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#energy-meter-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Energy meter commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Energy meter commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atemetermode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERMODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeteracvoltage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERACVOLTAGE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeterthreephase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERTHREEPHASE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeterpower" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERPOWER
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemetersestime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERSESTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeterchtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERCHTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeterconsum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERCONSUM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemetertotconsum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERTOTCONSUM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemetervoltage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERVOLTAGE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemetercurrent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERCURRENT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atwifistacfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTACFG
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapcfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPCFG
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifistaconn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTACONN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapconn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPCONN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifistastatic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTASTATIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifistaip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTAIP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifistamac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTAMAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPIP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPMAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapscan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPSCAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#athostname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+HOSTNAME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atinstname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+INSTNAME
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serial-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serial commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Serial commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atserial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SERIAL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#board-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Board config
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Board config">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atdevname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEVNAME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atsocketlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SOCKETLOCK
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atsocketlockminbreaktime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SOCKETLOCKMINBREAKTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atproximity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+PROXIMITY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attempsensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TEMPSENSOR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETER
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atserials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SERIALS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atauxinputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AUXINPUTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atauxoutputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AUXOUTPUTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atauxanaloginputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AUXANALOGINPUTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lua/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LUA Scripting reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API / WebDAV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scheduler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LICENSE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Installer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ATE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atcmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CMD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SUB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atunsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+UNSUB
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atrst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+RST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atuptime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+UPTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atchip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CHIP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atheap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+HEAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+VER
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atidfver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+IDFVER
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atbuildtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+BUILDTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attemp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TEMP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TZ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attzrule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TZRULE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evse-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EVSE commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EVSE commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+STATE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aterror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+ERROR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atenable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+ENABLE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atavailable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AVAILABLE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atreqauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+REQAUTH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atpendauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+PENDAUTH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AUTH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atchcur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CHCUR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atdefchcur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEFCHCUR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atmaxchcur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+MAXCHCUR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atconsumlim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CONSUMLIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atdefconsumlim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEFCONSUMLIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atchtimelim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+CHTIMELIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atdefchtimelim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEFCHTIMELIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atunderpowerlim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+UNDERPOWERLIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atdefunderpowerlim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEFUNDERPOWERLIM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atlimreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+LIMREACH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atsocketoutlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SOCKETOUTLET
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#energy-meter-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Energy meter commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Energy meter commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atemetermode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERMODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeteracvoltage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERACVOLTAGE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeterthreephase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERTHREEPHASE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeterpower" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERPOWER
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemetersestime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERSESTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeterchtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERCHTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeterconsum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERCONSUM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemetertotconsum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERTOTCONSUM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemetervoltage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERVOLTAGE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemetercurrent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETERCURRENT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atwifistacfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTACFG
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapcfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPCFG
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifistaconn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTACONN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapconn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPCONN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifistastatic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTASTATIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifistaip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTAIP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifistamac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFISTAMAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPIP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPMAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atwifiapscan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+WIFIAPSCAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#athostname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+HOSTNAME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atinstname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+INSTNAME
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serial-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serial commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Serial commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atserial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SERIAL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#board-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Board config
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Board config">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atdevname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+DEVNAME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atsocketlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SOCKETLOCK
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atsocketlockminbreaktime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SOCKETLOCKMINBREAKTIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atproximity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+PROXIMITY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attempsensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+TEMPSENSOR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atemeter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+EMETER
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atserials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+SERIALS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atauxinputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AUXINPUTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atauxoutputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AUXOUTPUTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atauxanaloginputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AT+AUXANALOGINPUTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/dzurikmiroslav/esp32-evse-docs/blob/main/docs/20-software/AT-Commands.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>AT Commands reference</h1>
+
+<p>AT commands are useful to communicate with the device from third party peripherals. A good use case is implememting a <a href="https://dzurikmiroslav.github.io/esp32-evse-docs/10-hardware/hmi-examples/#esphome-with-lvgl">HMI using ESPHome and LVGL</a> which not only offers a nice touch screen interface, but offers another way to integrate the EVSE with Home Assistant.</p>
+<p>AT commands support can be enabled in serial settings, any serial interface can be used for this. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only one interface can work in AT commands mode.</p>
+</div>
+<h2 id="basic-commands">Basic commands<a class="headerlink" href="#basic-commands" title="Permanent link">~</a></h2>
+<p>When AT Commands module is enabled, at startup, the device will print automatically on the line the <code>RDY</code> message once, to inform the client that communication can start. Since this mostly happens when the board booted up, it can be useful to detect on the client side a freshly booted state.</p>
+<h3 id="at">AT<a class="headerlink" href="#at" title="Permanent link">~</a></h3>
+<p>Check that the communication is working properly.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ate">ATE<a class="headerlink" href="#ate" title="Permanent link">~</a></h3>
+<p>Echo back to the client the AT command input (see the entered commands on a serial console terminal).</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ATE&lt;echo&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;echo&gt;</code></td>
+<td>WO</td>
+<td>uint8</td>
+<td>Echo commands (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="atcmd">AT+CMD<a class="headerlink" href="#atcmd" title="Permanent link">~</a></h3>
+<p>List all the supported AT commands by the ESP32-EVSE device.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+CMD</code></td>
+<td><em>List of commands</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">CMD</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">ATE0</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nv">ATE1</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">RST</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">CHIP</span><span class="o">?</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">CHIP</span><span class="o">=?</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">HEAP</span><span class="o">?</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">HEAP</span><span class="o">=?</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="o">...</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atsub">AT+SUB<a class="headerlink" href="#atsub" title="Permanent link">~</a></h3>
+<p>Subscribe to periodic response to other commands, let ESP32-EVSE send responses automatically, repeatedly.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+SUB=&lt;command&gt;,&lt;period&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+SUB=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;command&gt;</code></td>
+<td>W</td>
+<td>string</td>
+<td>AT command name (max length 32)</td>
+</tr>
+<tr>
+<td><code>&lt;period&gt;</code></td>
+<td>W</td>
+<td>uint32</td>
+<td>Time period in ms</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SUB</span><span class="o">=</span><span class="s">&quot;+ENABLE&quot;</span><span class="o">,</span><span class="mi">1000</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">OK</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SUB</span><span class="o">=</span><span class="s">&quot;+AVAILABLE&quot;</span><span class="o">,</span><span class="mi">2000</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">OK</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="o">+</span><span class="nv">ENABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="o">+</span><span class="nv">ENABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="o">+</span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="o">+</span><span class="nv">ENABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="o">+</span><span class="nv">ENABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="o">+</span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="mi">1</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only works with read commands (not write, test or execute). When you subscribe multiple times to the same command, only the period will be updated. AT commands task run in a 100ms delay loop, setting any period of lower value has no effect.</p>
+</div>
+<h3 id="atunsub">AT+UNSUB<a class="headerlink" href="#atunsub" title="Permanent link">~</a></h3>
+<p>Unsubscribe periodical reading of a certain command.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+UNSUB=&lt;command&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+UNSUB=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;command&gt;</code></td>
+<td>W</td>
+<td>string</td>
+<td>AT command name (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SUB</span><span class="o">=</span><span class="s">&quot;+ENABLE&quot;</span><span class="o">,</span><span class="mi">1000</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">OK</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SUB</span><span class="o">=</span><span class="s">&quot;+AVAILABLE&quot;</span><span class="o">,</span><span class="mi">1000</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nv">OK</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="o">+</span><span class="nv">ENABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="o">+</span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="o">+</span><span class="nv">ENABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="o">+</span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">UNSUB</span><span class="o">=</span><span class="s">&quot;+ENABLE&quot;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="o">+</span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="o">+</span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SUB</span><span class="o">=</span><span class="s">&quot;+ENABLE&quot;</span><span class="o">,</span><span class="mi">1000</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nv">OK</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SUB</span><span class="o">=</span><span class="s">&quot;+AVAILABLE&quot;</span><span class="o">,</span><span class="mi">1000</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="nv">OK</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="o">+</span><span class="nv">ENABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="o">+</span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">UNSUB</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Call with empty string removes all command subscriptions.</p>
+</div>
+<h2 id="system-commands">System commands<a class="headerlink" href="#system-commands" title="Permanent link">~</a></h2>
+<h3 id="atrst">AT+RST<a class="headerlink" href="#atrst" title="Permanent link">~</a></h3>
+<p>Restart ESP32-EVSE device.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+RST</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="atuptime">AT+UPTIME<a class="headerlink" href="#atuptime" title="Permanent link">~</a></h3>
+<p>Print time since last boot, in seconds.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+UPTIME?</code></td>
+<td><code>+UPTIME=&lt;uptime&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+UPTIME=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;time&gt;</code></td>
+<td>RW</td>
+<td>uint32</td>
+<td>Time in s</td>
+</tr>
+</tbody>
+</table>
+<h3 id="atchip">AT+CHIP<a class="headerlink" href="#atchip" title="Permanent link">~</a></h3>
+<p>Print ESP32 chip model information.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+CHIP?</code></td>
+<td><code>+CHIP=&lt;model&gt;,&lt;cores&gt;,&lt;revision&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+CHIP=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;model&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Name of model</td>
+</tr>
+<tr>
+<td><code>&lt;cores&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Number of CPU cores</td>
+</tr>
+<tr>
+<td><code>&lt;revision&gt;</code></td>
+<td>RO</td>
+<td>uint16</td>
+<td>Chip revision number (in format MXX; where M - wafer major version, XX - wafer minor version)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">CHIP</span><span class="o">?</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="o">+</span><span class="nv">CHIP</span><span class="o">=</span><span class="s">&quot;esp32&quot;</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">100</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atheap">AT+HEAP<a class="headerlink" href="#atheap" title="Permanent link">~</a></h3>
+<p>Print memory heap status.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+HEAP?</code></td>
+<td><code>+HEAP=&lt;used&gt;,&lt;total&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+HEAP=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;used&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>Used heap size in bytes</td>
+</tr>
+<tr>
+<td><code>&lt;total&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>Total heap size in bytes</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">HEAP</span><span class="o">?</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="o">+</span><span class="nv">HEAP</span><span class="o">=</span><span class="mi">115992</span><span class="o">,</span><span class="mi">308884</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atver">AT+VER<a class="headerlink" href="#atver" title="Permanent link">~</a></h3>
+<p>Print ESP32-EVSE firmware version.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+VER?</code></td>
+<td><code>+VER=&lt;version&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+VER=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;version&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Version, commonly in format major.minor.bugfix</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">VER</span><span class="o">?</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">+</span><span class="nv">VER</span><span class="o">=</span><span class="s">&quot;v2.0.0&quot;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atidfver">AT+IDFVER<a class="headerlink" href="#atidfver" title="Permanent link">~</a></h3>
+<p>Print ESP-IDF version that was used to build the firmware.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+IDFVER?</code></td>
+<td><code>+IDFVER=&lt;version&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+IDFVER=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;version&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>ESP-IDF version</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">IDFVER</span><span class="o">?</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="o">+</span><span class="nv">IDFVER</span><span class="o">=</span><span class="s">&quot;v5.5&quot;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atbuildtime">AT+BUILDTIME<a class="headerlink" href="#atbuildtime" title="Permanent link">~</a></h3>
+<p>Print the datetime of build.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+BUILDTIME?</code></td>
+<td><code>+BUILDTIME=&lt;date&gt;,&lt;time&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+BUILDTIME=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;date&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Compile date</td>
+</tr>
+<tr>
+<td><code>&lt;time&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Compile time</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">BUILDTIME</span><span class="o">?</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="o">+</span><span class="nv">BUILDTIME</span><span class="o">=</span><span class="s">&quot;Aug 20 2025&quot;</span><span class="o">,</span><span class="s">&quot;22:13:07&quot;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="attemp">AT+TEMP<a class="headerlink" href="#attemp" title="Permanent link">~</a></h3>
+<p>Print the measured temperature values.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+TEMP?</code></td>
+<td><code>+TEMP=&lt;count&gt;,&lt;high&gt;,&lt;low&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+TEMP=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;count&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Count of temperature sensors</td>
+</tr>
+<tr>
+<td><code>&lt;high&gt;</code></td>
+<td>RO</td>
+<td>int32</td>
+<td>Highest temperature in dg.C*100</td>
+</tr>
+<tr>
+<td><code>&lt;low&gt;</code></td>
+<td>RO</td>
+<td>int32</td>
+<td>Lowest temperature in dg.C*100</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">TEMP</span><span class="o">?</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="o">+</span><span class="nv">TEMP</span><span class="o">=</span><span class="mi">2</span><span class="o">,</span><span class="mi">2965</span><span class="o">,</span><span class="mi">2887</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nv">OK</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">TEMP</span><span class="o">?</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="o">+</span><span class="nv">TEMP</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span><span class="mi">2875</span><span class="o">,</span><span class="mi">2875</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nv">OK</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">TEMP</span><span class="o">?</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="o">+</span><span class="nv">TEMP</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the example above: first reading has 2 temperature sensors; second reading has 1 temperature sensor; last reading has no temperature sensor.</p>
+</div>
+<h3 id="attz">AT+TZ<a class="headerlink" href="#attz" title="Permanent link">~</a></h3>
+<p>Read/write timezone name.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+TZ?</code></td>
+<td><code>+TZ=&lt;timezone&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+TZ=&lt;timezone&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+TZ=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;timezone&gt;</code></td>
+<td>RW</td>
+<td>string</td>
+<td>Timezone name (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">TZ</span><span class="o">?</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="o">+</span><span class="nv">TZ</span><span class="o">=</span><span class="s">&quot;Etc/UTC&quot;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nv">OK</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">TZ</span><span class="o">=</span><span class="s">&quot;Europe/Prague&quot;</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="attzrule">AT+TZRULE<a class="headerlink" href="#attzrule" title="Permanent link">~</a></h3>
+<p>Read Posix timezone string.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+TZRULE?</code></td>
+<td><code>+TZRULE=&lt;timezone_rule&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+TZRULE=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;timezone_rule&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Posix timezone string (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">TZRULE</span><span class="o">?</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="o">+</span><span class="nv">TZRULE</span><span class="o">=</span><span class="s">&quot;CET-1CEST,M3.5.0,M10.5.0/3&quot;</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="attime">AT+TIME<a class="headerlink" href="#attime" title="Permanent link">~</a></h3>
+<p>Read/write epoch Unix timestamp (write to set the system time manually).</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+TIME?</code></td>
+<td><code>+TIME=&lt;time&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+TIME=&lt;time&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+TIME=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;time&gt;</code></td>
+<td>RW</td>
+<td>uint64</td>
+<td>Epoch time in s</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">TIME</span><span class="o">?</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="o">+</span><span class="nv">TIME</span><span class="o">=</span><span class="mi">1756129834</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h2 id="evse-commands">EVSE commands<a class="headerlink" href="#evse-commands" title="Permanent link">~</a></h2>
+<h3 id="atstate">AT+STATE<a class="headerlink" href="#atstate" title="Permanent link">~</a></h3>
+<p>Print ESP32-EVSE internal state according to J1772 standard.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+STATE?</code></td>
+<td><code>+STATE=&lt;state&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+STATE=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;state&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>IEC 61851 / J1772 state: <code>A</code>=<code>0</code>, <code>B1</code>=<code>1</code>, <code>B2</code>=<code>2</code>, <code>C1</code>=<code>3</code>, <code>C2</code>=<code>4</code>, <code>D1</code>=<code>5</code>, <code>D2</code>=<code>6</code>, <code>E</code>=<code>7</code>, <code>F</code>=<code>8</code>. See <a href="../state-machine/">State machine</a></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">STATE</span><span class="o">?</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="o">+</span><span class="nv">STATE</span><span class="o">=</span><span class="mi">4</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="aterror">AT+ERROR<a class="headerlink" href="#aterror" title="Permanent link">~</a></h3>
+<p>Print ESP32-EVSE <a href="https://github.com/dzurikmiroslav/esp32-evse/blob/master/components/evse/include/evse.h#L11">error bits</a> in decimal value (use bitmask to decode).</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+ERROR?</code></td>
+<td><code>+ERROR=&lt;error&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+ERROR=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;error&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>EVSE error bit</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">ERROR</span><span class="o">?</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">+</span><span class="nv">ERROR</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atenable">AT+ENABLE<a class="headerlink" href="#atenable" title="Permanent link">~</a></h3>
+<p>Read/write ESP32-EVSE charging enabled setting.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+ENABLE?</code></td>
+<td><code>+ENABLE=&lt;enable&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+ENABLE=&lt;enable&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+ENABLE=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;enable&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Charger enabled (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">ENABLE</span><span class="o">?</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="o">+</span><span class="nv">ENABLE</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nv">OK</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">ENABLE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atavailable">AT+AVAILABLE<a class="headerlink" href="#atavailable" title="Permanent link">~</a></h3>
+<p>Read/write ESP32-EVSE charging available setting (<code>F</code> state).</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+AVAILABLE?</code></td>
+<td><code>+AVAILABLE=&lt;available&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+AVAILABLE=&lt;available&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+AVAILABLE=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;available&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Charger available (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">AVAILABLE</span><span class="o">?</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="o">+</span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When ESP32-EVSE is set to be <code>available=0</code> it doesn't mean that state will always be <code>F</code>. Error can override the state to <code>E</code>.</p>
+</div>
+<h3 id="atreqauth">AT+REQAUTH<a class="headerlink" href="#atreqauth" title="Permanent link">~</a></h3>
+<p>Read/write ESP32-EVSE require authorization option before starting to charge.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+REQAUTH?</code></td>
+<td><code>+REQAUTH=&lt;require_auth&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+REQAUTH=&lt;require_auth&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+REQAUTH=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;require_auth&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Authorization required (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">REQAUTH</span><span class="o">?</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="o">+</span><span class="nv">REQAUTH</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atpendauth">AT+PENDAUTH<a class="headerlink" href="#atpendauth" title="Permanent link">~</a></h3>
+<p>Print the state of the ESP32-EVSE pending authorization bit.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+PENDAUTH?</code></td>
+<td><code>+PENDAUTH=&lt;pending_auth&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+PENDAUTH=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;pending_auth&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Authorization pending (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">PENDAUTH</span><span class="o">?</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="o">+</span><span class="nv">PENDAUTH</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atauth">AT+AUTH<a class="headerlink" href="#atauth" title="Permanent link">~</a></h3>
+<p>This command is to confirm the pending authorization, and allow the system to charge.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+AUTH</code></td>
+<td>---</td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">AUTH</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atchcur">AT+CHCUR<a class="headerlink" href="#atchcur" title="Permanent link">~</a></h3>
+<p>Read/write the actual charging current value. Value must be in range 6A - MAXCHCUR.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+CHCUR?</code></td>
+<td><code>+CHCUR=&lt;current&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+CHCUR=&lt;current&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+CHCUR=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;current&gt;</code></td>
+<td>RW</td>
+<td>uint16</td>
+<td>Charging current in A*10</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">CHCUR</span><span class="o">?</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="o">+</span><span class="nv">CHCUR</span><span class="o">=</span><span class="mi">60</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nv">OK</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">CHCUR</span><span class="o">=</span><span class="mi">20</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="nv">ERROR</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The example above returns error because value 2A is out of range (6A is lower limit)</p>
+</div>
+<h3 id="atdefchcur">AT+DEFCHCUR<a class="headerlink" href="#atdefchcur" title="Permanent link">~</a></h3>
+<p>Read/write default charging current. Value must be in range 6A - MAXCHCUR.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+DEFCHCUR?</code></td>
+<td><code>+DEFCHCUR=&lt;current&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+DEFCHCUR=&lt;current&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+DEFCHCUR=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;current&gt;</code></td>
+<td>RW</td>
+<td>uint16</td>
+<td>Charging current in A*10</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">DEFCHCUR</span><span class="o">?</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="o">+</span><span class="nv">DEFCHCUR</span><span class="o">=</span><span class="mi">320</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atmaxchcur">AT+MAXCHCUR<a class="headerlink" href="#atmaxchcur" title="Permanent link">~</a></h3>
+<p>Read/write max charging current. Value must be in range 6A - 63A.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+MAXCHCUR?</code></td>
+<td><code>+MAXCHCUR=&lt;current&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+MAXCHCUR=&lt;current&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+MAXCHCUR=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;current&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Charging current in A</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">MAXCHCUR</span><span class="o">?</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="o">+</span><span class="nv">MAXCHCUR</span><span class="o">=</span><span class="mi">63</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Set this to match the electrical limits of your installation!</p>
+</div>
+<h3 id="atconsumlim">AT+CONSUMLIM<a class="headerlink" href="#atconsumlim" title="Permanent link">~</a></h3>
+<p>Read/write energy consumption limit (stop charging session if the limit has been hit).</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+CONSUMLIM?</code></td>
+<td><code>+CONSUMLIM=&lt;consumption&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+CONSUMLIM=&lt;consumption&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+CONSUMLIM=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;consumption&gt;</code></td>
+<td>RW</td>
+<td>uint32</td>
+<td>Consumption in Wh</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">CONSUMLIM</span><span class="o">?</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="o">+</span><span class="nv">CONSUMLIM</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Value 0 means no limit</p>
+</div>
+<h3 id="atdefconsumlim">AT+DEFCONSUMLIM<a class="headerlink" href="#atdefconsumlim" title="Permanent link">~</a></h3>
+<p>Read/write the default consumption limit.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+DEFCONSUMLIM?</code></td>
+<td><code>+DEFCONSUMLIM=&lt;consumption&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+DEFCONSUMLIM=&lt;consumption&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+DEFCONSUMLIM=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;consumption&gt;</code></td>
+<td>RW</td>
+<td>uint32</td>
+<td>Consumption in Wh</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">DEFCONSUMLIM</span><span class="o">?</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="o">+</span><span class="nv">DEFCONSUMLIM</span><span class="o">=</span><span class="mi">25000</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This example sets a 25 kWh amount of energy consumption limit</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Value 0 means no limit</p>
+</div>
+<h3 id="atchtimelim">AT+CHTIMELIM<a class="headerlink" href="#atchtimelim" title="Permanent link">~</a></h3>
+<p>Read/write charging time limit (stop charging session if the limit has been hit).</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+CHTIMELIM?</code></td>
+<td><code>+CHTIMELIM=&lt;time&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+CHTIMELIM=&lt;time&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+CHTIMELIM=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;time&gt;</code></td>
+<td>RW</td>
+<td>uint32</td>
+<td>Time in s</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">CHTIMELIM</span><span class="o">=</span><span class="mi">7200</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This example sets a 2h charging time limit</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Value 0 means no limit</p>
+</div>
+<h3 id="atdefchtimelim">AT+DEFCHTIMELIM<a class="headerlink" href="#atdefchtimelim" title="Permanent link">~</a></h3>
+<p>Read/write the default charging time limit.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+DEFCHTIMELIM?</code></td>
+<td><code>+DEFCHTIMELIM=&lt;time&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+DEFCHTIMELIM=&lt;time&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+DEFCHTIMELIM=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;time&gt;</code></td>
+<td>RW</td>
+<td>uint32</td>
+<td>Time in s</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">DEFCHTIMELIM</span><span class="o">?</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="o">+</span><span class="nv">DEFCHTIMELIM</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Value 0 means no limit</p>
+</div>
+<h3 id="atunderpowerlim">AT+UNDERPOWERLIM<a class="headerlink" href="#atunderpowerlim" title="Permanent link">~</a></h3>
+<p>Read/write under power charging limit (stop charging session when power falls under the limit).</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+UNDERPOWERLIM?</code></td>
+<td><code>+UNDERPOWERLIM=&lt;power&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+UNDERPOWERLIM=&lt;power&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+UNDERPOWERLIM=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;power&gt;</code></td>
+<td>RW</td>
+<td>uint16</td>
+<td>Power in W</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">UNDERPOWERLIM</span><span class="o">?</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="o">+</span><span class="nv">UNDERPOWERLIM</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Value 0 means no limit</p>
+</div>
+<h3 id="atdefunderpowerlim">AT+DEFUNDERPOWERLIM<a class="headerlink" href="#atdefunderpowerlim" title="Permanent link">~</a></h3>
+<p>Read/write the default under power charging limit.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+DEFUNDERPOWERLIM?</code></td>
+<td><code>+DEFUNDERPOWERLIM=&lt;power&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+DEFUNDERPOWERLIM=&lt;power&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+DEFUNDERPOWERLIM=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;power&gt;</code></td>
+<td>RW</td>
+<td>uint16</td>
+<td>Power in W</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">DEFUNDERPOWERLIM</span><span class="o">?</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="o">+</span><span class="nv">DEFUNDERPOWERLIM</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Value 0 means no limit</p>
+</div>
+<h3 id="atlimreach">AT+LIMREACH<a class="headerlink" href="#atlimreach" title="Permanent link">~</a></h3>
+<p>Print the state of the charging limit bit (any limit was reached). </p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+LIMREACH?</code></td>
+<td><code>+LIMREACH=&lt;reached&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+LIMREACH=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;reached&gt;</code></td>
+<td>R</td>
+<td>uint8</td>
+<td>Is charging limit reached (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">LIMREACH</span><span class="o">?</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="o">+</span><span class="nv">LIMREACH</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atsocketoutlet">AT+SOCKETOUTLET<a class="headerlink" href="#atsocketoutlet" title="Permanent link">~</a></h3>
+<p>Read/write socket outlet installation setting. Set it only for PP board. 
+This enables detection of provided cable max current, and socket lock functionality (if it's available).</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+SOCKETOUTLET?</code></td>
+<td><code>+SOCKETOUTLET=&lt;socket_outlet&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+SOCKETOUTLET=&lt;socket_outlet&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+SOCKETOUTLET=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;socket_outlet&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Socket outlet (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SOCKETOUTLET</span><span class="o">?</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="o">+</span><span class="nv">SOCKETOUTLET</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Value 0 means no limit</p>
+</div>
+<h2 id="energy-meter-commands">Energy meter commands<a class="headerlink" href="#energy-meter-commands" title="Permanent link">~</a></h2>
+<h3 id="atemetermode">AT+EMETERMODE<a class="headerlink" href="#atemetermode" title="Permanent link">~</a></h3>
+<p>Read/write energy meter mode. 
+Value CUR require <code>EMETER=(2|1),x</code>.
+Value CUR_VLT require <code>EMETER=2,x</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERMODE?</code></td>
+<td><code>+EMETERMODE=&lt;mode&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERMODE=&lt;mode&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERMODE=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;mode&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Mode number (DUMMY=0, CUR=1, CUR_VLT=2)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERMODE</span><span class="o">?</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="o">+</span><span class="nv">EMETERMODE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="nv">OK</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERMODE</span><span class="o">=</span><span class="mi">5</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="nv">ERROR</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the example above, value 5 fails because it is out of range</p>
+</div>
+<h3 id="atemeteracvoltage">AT+EMETERACVOLTAGE<a class="headerlink" href="#atemeteracvoltage" title="Permanent link">~</a></h3>
+<p>Read/write energy meter voltage setting, used for calculation in DUMMY and CUR mode (use range 100V - 300V).</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERACVOLTAGE?</code></td>
+<td><code>+EMETERACVOLTAGE=&lt;voltage&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERACVOLTAGE=&lt;voltage&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERACVOLTAGE=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;voltage&gt;</code></td>
+<td>RW</td>
+<td>uint16</td>
+<td>Voltage in V</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERACVOLTAGE</span><span class="o">?</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="o">+</span><span class="nv">EMETERACVOLTAGE</span><span class="o">=</span><span class="mi">253</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="nv">OK</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERACVOLTAGE</span><span class="o">=</span><span class="mi">305</span>
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="nv">ERROR</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the example above, setting value 305 fails because it is out of range</p>
+</div>
+<h3 id="atemeterthreephase">AT+EMETERTHREEPHASE<a class="headerlink" href="#atemeterthreephase" title="Permanent link">~</a></h3>
+<p>Read/write energy meter three phase mode setting.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERTHREEPHASE?</code></td>
+<td><code>+EMETERTHREEPHASE=&lt;three_phases&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERTHREEPHASE=&lt;three_phases&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERTHREEPHASE=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;three_phases&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Three phases (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERTHREEPHASE</span><span class="o">?</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="o">+</span><span class="nv">EMETERTHREEPHASE</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atemeterpower">AT+EMETERPOWER<a class="headerlink" href="#atemeterpower" title="Permanent link">~</a></h3>
+<p>Print the value of the actual charging power.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERPOWER?</code></td>
+<td><code>+EMETERPOWER=&lt;power&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERPOWER=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;power&gt;</code></td>
+<td>RO</td>
+<td>uint16</td>
+<td>Power in W</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERPOWER</span><span class="o">?</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="o">+</span><span class="nv">EMETERPOWER</span><span class="o">=</span><span class="mi">11085</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atemetersestime">AT+EMETERSESTIME<a class="headerlink" href="#atemetersestime" title="Permanent link">~</a></h3>
+<p>Print the duration of the current charging session.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERSESTIME?</code></td>
+<td><code>+EMETERSESTIME=&lt;time&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERSESTIME=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;time&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>Time in s</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERSESTIME</span><span class="o">?</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="o">+</span><span class="nv">EMETERSESTIME</span><span class="o">=</span><span class="mi">3769</span>
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atemeterchtime">AT+EMETERCHTIME<a class="headerlink" href="#atemeterchtime" title="Permanent link">~</a></h3>
+<p>Print the amount of time spent with charging.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERCHTIME?</code></td>
+<td><code>+EMETERCHTIME=&lt;time&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERCHTIME=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;time&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>Time in s</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERCHTIME</span><span class="o">?</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="o">+</span><span class="nv">EMETERCHTIME</span><span class="o">=</span><span class="mi">3702</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atemeterconsum">AT+EMETERCONSUM<a class="headerlink" href="#atemeterconsum" title="Permanent link">~</a></h3>
+<p>Print the energy consumption of the actual session.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERCONSUM?</code></td>
+<td><code>+EMETERCONSUM=&lt;consumption&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERCONSUM=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;consumption&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>Consumption in Wh</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERCONSUM</span><span class="o">?</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="o">+</span><span class="nv">EMETERCONSUM</span><span class="o">=</span><span class="mi">35547</span>
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atemetertotconsum">AT+EMETERTOTCONSUM<a class="headerlink" href="#atemetertotconsum" title="Permanent link">~</a></h3>
+<p>Read/reset the total energy delivered with this ESP32-EVSE device.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERTOTCONSUM?</code></td>
+<td><code>+EMETERTOTCONSUM=&lt;consumption&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERTOTCONSUM=&lt;consumption&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERTOTCONSUM=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;consumption&gt;</code></td>
+<td>RW</td>
+<td>uint64</td>
+<td>Consumption in Wh</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERTOTCONSUM</span><span class="o">?</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="o">+</span><span class="nv">EMETERTOTCONSUM</span><span class="o">=</span><span class="mi">915517547</span>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="nv">OK</span>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERCONSUM</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="nv">OK</span>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERCONSUM</span><span class="o">=</span><span class="mi">5</span>
+</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="nv">ERROR</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To reset total consumption use value 0, other values will throw an error.</p>
+</div>
+<h3 id="atemetervoltage">AT+EMETERVOLTAGE<a class="headerlink" href="#atemetervoltage" title="Permanent link">~</a></h3>
+<p>Print the measured or preset voltage.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERVOLTAGE?</code></td>
+<td><code>+EMETERVOLTAGE=&lt;l1_vlt&gt;,&lt;l2_vlt&gt;,&lt;l3_vlt&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERVOLTAGE=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;l1_vlt&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>L1 voltage in mV</td>
+</tr>
+<tr>
+<td><code>&lt;l2_vlt&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>L2 voltage in mV</td>
+</tr>
+<tr>
+<td><code>&lt;l3_vlt&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>L3 voltage in mV</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERVOLTAGE</span><span class="o">?</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="o">+</span><span class="nv">EMETERVOLTAGE</span><span class="o">=</span><span class="mi">255951</span><span class="o">,</span><span class="mi">254753</span><span class="o">,</span><span class="mi">255852</span>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="nv">OK</span>
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERVOLTAGE</span><span class="o">?</span>
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="o">+</span><span class="nv">EMETERVOLTAGE</span><span class="o">=</span><span class="mi">250000</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span>
+</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When energy meter is single phase, L2 and L3 voltage are 0.</p>
+</div>
+<h3 id="atemetercurrent">AT+EMETERCURRENT<a class="headerlink" href="#atemetercurrent" title="Permanent link">~</a></h3>
+<p>Print the measured or preset current.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETERCURRENT?</code></td>
+<td><code>+EMETERCURRENT=&lt;l1_cur&gt;,&lt;l2_cur&gt;,&lt;l3_cur&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETERCURRENT=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;l1_cur&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>L1 current in mA</td>
+</tr>
+<tr>
+<td><code>&lt;l2_cur&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>L2 current in mA</td>
+</tr>
+<tr>
+<td><code>&lt;l3_cur&gt;</code></td>
+<td>RO</td>
+<td>uint32</td>
+<td>L3 current in mA</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERCURRENT</span><span class="o">?</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="o">+</span><span class="nv">EMETERCURRENT</span><span class="o">=</span><span class="mi">10951</span><span class="o">,</span><span class="mi">10753</span><span class="o">,</span><span class="mi">105852</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="nv">OK</span>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">EMETERCURRENT</span><span class="o">?</span>
+</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="o">+</span><span class="nv">EMETERCURRENT</span><span class="o">=</span><span class="mi">32000</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span>
+</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When energy meter is single phase, L2 and L3 current are 0.</p>
+</div>
+<h2 id="network-commands">Network commands<a class="headerlink" href="#network-commands" title="Permanent link">~</a></h2>
+<h3 id="atwifistacfg">AT+WIFISTACFG<a class="headerlink" href="#atwifistacfg" title="Permanent link">~</a></h3>
+<p>This command is used to read/write WiFi STA (client) configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFISTACFG?</code></td>
+<td><code>+WIFISTACFG=&lt;enabled&gt;,&lt;ssid&gt;,&lt;password&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFISTACFG=&lt;enabled&gt;,&lt;ssid&gt;,&lt;password&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFISTACFG=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;enabled&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Enabled/disable STA (<code>0</code> or <code>1</code>)</td>
+</tr>
+<tr>
+<td><code>&lt;ssid&gt;</code></td>
+<td>RW</td>
+<td>string</td>
+<td>SSID (max length 32)</td>
+</tr>
+<tr>
+<td><code>&lt;password&gt;</code></td>
+<td>WO</td>
+<td>string</td>
+<td>Password (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTACFG</span><span class="o">?</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="o">+</span><span class="nv">WIFISTACFG</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span><span class="s">&quot;MirkoTik-E12345&quot;</span><span class="o">,</span><span class="s">&quot;&quot;</span>
+</span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="nv">OK</span>
+</span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>
+</span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTACFG</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-40-6"><a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="nv">OK</span>
+</span><span id="__span-40-7"><a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>
+</span><span id="__span-40-8"><a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTACFG</span><span class="o">?</span>
+</span><span id="__span-40-9"><a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="o">+</span><span class="nv">WIFISTACFG</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="s">&quot;MirkoTik-E12345&quot;</span><span class="o">,</span><span class="s">&quot;&quot;</span>
+</span><span id="__span-40-10"><a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="nv">OK</span>
+</span><span id="__span-40-11"><a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a>
+</span><span id="__span-40-12"><a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTACFG</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span><span class="s">&quot;MirkoTik-E99999&quot;</span><span class="o">,</span><span class="s">&quot;topsecret&quot;</span>
+</span><span id="__span-40-13"><a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a><span class="nv">OK</span>
+</span><span id="__span-40-14"><a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a>
+</span><span id="__span-40-15"><a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTACFG</span><span class="o">?</span>
+</span><span id="__span-40-16"><a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a><span class="o">+</span><span class="nv">WIFISTACFG</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span><span class="s">&quot;MirkoTik-E99999&quot;</span><span class="o">,</span><span class="s">&quot;&quot;</span>
+</span><span id="__span-40-17"><a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Calling <code>WIFISTACFG=(0|1)</code> only disables/enables the WiFi client, SSID and password will be not modified.</p>
+</div>
+<h3 id="atwifiapcfg">AT+WIFIAPCFG<a class="headerlink" href="#atwifiapcfg" title="Permanent link">~</a></h3>
+<p>Read/write WiFi access point mode configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFIAPCFG?</code></td>
+<td><code>+WIFIAPCFG=&lt;enabled&gt;,&lt;ssid&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFIAPCFG=&lt;enabled&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFIAPCFG=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;enabled&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Enabled/disable AP (<code>0</code> or <code>1</code>)</td>
+</tr>
+<tr>
+<td><code>&lt;ssid&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>SSID (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFIAPCFG</span><span class="o">?</span>
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="o">+</span><span class="nv">WIFIAPCFG</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="s">&quot;ESP32-EVSE-03fc60&quot;</span>
+</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="nv">OK</span>
+</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
+</span><span id="__span-41-5"><a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFIAPCFG</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-41-6"><a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="nv">OK</span>
+</span><span id="__span-41-7"><a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a>
+</span><span id="__span-41-8"><a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTACFG</span><span class="o">?</span>
+</span><span id="__span-41-9"><a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a><span class="o">+</span><span class="nv">WIFIAPCFG</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span><span class="s">&quot;ESP32-EVSE-03fb59&quot;</span>
+</span><span id="__span-41-10"><a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After enabling access point mode, if there's no client connected within 1 minute, access point mode will be disabled.</p>
+</div>
+<h3 id="atwifistaconn">AT+WIFISTACONN<a class="headerlink" href="#atwifistaconn" title="Permanent link">~</a></h3>
+<p>Print WiFi client mode connection state.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFISTACONN?</code></td>
+<td><code>+WIFISTACONN=&lt;connection&gt;,&lt;rssi&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFISTACONN=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;connection&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Has connection (<code>0</code> or <code>1</code>)</td>
+</tr>
+<tr>
+<td><code>&lt;rssi&gt;</code></td>
+<td>RO</td>
+<td>int8</td>
+<td>RSSI in dB</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTACONN</span><span class="o">?</span>
+</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="o">+</span><span class="nv">WIFISTACONN</span><span class="o">=</span><span class="mi">1</span><span class="o">,-</span><span class="mi">61</span>
+</span><span id="__span-42-3"><a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atwifiapconn">AT+WIFIAPCONN<a class="headerlink" href="#atwifiapconn" title="Permanent link">~</a></h3>
+<p>Print WiFi access point mode connection state.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFIAPCONN?</code></td>
+<td><code>+WIFIAPCONN=&lt;connection&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFIAPCONN=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;connection&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Has connection (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFIAPCONN</span><span class="o">?</span>
+</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="o">+</span><span class="nv">WIFIAPCONN</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atwifistastatic">AT+WIFISTASTATIC<a class="headerlink" href="#atwifistastatic" title="Permanent link">~</a></h3>
+<p>This command is used to read/write WiFi STA static IP configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFISTASTATIC?</code></td>
+<td><code>+WIFISTASTATIC=&lt;enabled&gt;,&lt;ip&gt;,&lt;gateway&gt;,&lt;netmask&gt;,&lt;dns&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFISTASTATIC=&lt;enabled&gt;,&lt;ip&gt;,&lt;gateway&gt;,&lt;netmask&gt;&lt;dns&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFISTASTATIC=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;enabled&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Enabled/disable static IP (<code>0</code> or <code>1</code>)</td>
+</tr>
+<tr>
+<td><code>&lt;ip&gt;</code></td>
+<td>RW</td>
+<td>string</td>
+<td>IP address (max length 32)</td>
+</tr>
+<tr>
+<td><code>&lt;gateway&gt;</code></td>
+<td>RW</td>
+<td>string</td>
+<td>Gateway (max length 32)</td>
+</tr>
+<tr>
+<td><code>&lt;netmask&gt;</code></td>
+<td>RW</td>
+<td>string</td>
+<td>Netmask (max length 32)</td>
+</tr>
+<tr>
+<td><code>&lt;dns&gt;</code></td>
+<td>RW</td>
+<td>string</td>
+<td>DNS server (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="nv">OK</span>
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTASTATIC</span><span class="o">?</span>
+</span><span id="__span-44-3"><a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="o">+</span><span class="nv">WIFISTASTATIC</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span><span class="s">&quot;192.168.88.100&quot;</span><span class="o">,</span><span class="s">&quot;192.168.88.1&quot;</span><span class="o">,</span><span class="s">&quot;255.255.255.0&quot;</span><span class="o">,</span><span class="s">&quot;192.168.88.1&quot;</span>
+</span><span id="__span-44-4"><a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="nv">OK</span>
+</span><span id="__span-44-5"><a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a>
+</span><span id="__span-44-6"><a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTASTATIC</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-44-7"><a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a><span class="nv">OK</span>
+</span><span id="__span-44-8"><a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a>
+</span><span id="__span-44-9"><a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTASTATIC</span><span class="o">?</span>
+</span><span id="__span-44-10"><a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a><span class="o">+</span><span class="nv">WIFISTASTATIC</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="s">&quot;192.168.88.100&quot;</span><span class="o">,</span><span class="s">&quot;192.168.88.1&quot;</span><span class="o">,</span><span class="s">&quot;255.255.255.0&quot;</span><span class="o">,</span><span class="s">&quot;192.168.88.1&quot;</span>
+</span><span id="__span-44-11"><a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a><span class="nv">OK</span>
+</span><span id="__span-44-12"><a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a>
+</span><span id="__span-44-13"><a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTASTATIC</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span><span class="s">&quot;192.168.88.101&quot;</span>
+</span><span id="__span-44-14"><a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Calling <code>WIFISTASTATIC=(0|1)</code> only disables/enables the static IP, other parameters will be not modified. </p>
+</div>
+<h3 id="atwifistaip">AT+WIFISTAIP<a class="headerlink" href="#atwifistaip" title="Permanent link">~</a></h3>
+<p>Print WiFi client IP address.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFISTAIP?</code></td>
+<td><code>+WIFISTAIP=&lt;ip&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFISTAIP=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;ip&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>IP address</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTAIP</span><span class="o">?</span>
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="o">+</span><span class="nv">WIFISTAIP</span><span class="o">=</span><span class="s">&quot;192.168.88.50&quot;</span>
+</span><span id="__span-45-3"><a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atwifistamac">AT+WIFISTAMAC<a class="headerlink" href="#atwifistamac" title="Permanent link">~</a></h3>
+<p>Print WiFi client MAC address.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFISTAMAC?</code></td>
+<td><code>+WIFISTAMAC=&lt;mac&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFISTAMAC=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;mac&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>IP address</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFISTAMAC</span><span class="o">?</span>
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="o">+</span><span class="nv">WIFISTAMAC</span><span class="o">=</span><span class="s">&quot;30:c6:f7:x3:ab:5c&quot;</span>
+</span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atwifiapip">AT+WIFIAPIP<a class="headerlink" href="#atwifiapip" title="Permanent link">~</a></h3>
+<p>Print WiFi access point IP address.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFIAPIP?</code></td>
+<td><code>+WIFIAPIP=&lt;ip&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFIAPIP=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;ip&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>IP address</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFIAPIP</span><span class="o">?</span>
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="o">+</span><span class="nv">WIFIAPIP</span><span class="o">=</span><span class="s">&quot;192.168.4.1&quot;</span>
+</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atwifiapmac">AT+WIFIAPMAC<a class="headerlink" href="#atwifiapmac" title="Permanent link">~</a></h3>
+<p>Print WiFi access point MAC address.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFIAPMAC?</code></td>
+<td><code>+WIFIAPMAC=&lt;mac&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+WIFIAPMAC=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;mac&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>IP address</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFIAPMAC</span><span class="o">?</span>
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="o">+</span><span class="nv">WIFIAPMAC</span><span class="o">=</span><span class="s">&quot;30:c6:f7:x3:ab:5d&quot;</span>
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atwifiapscan">AT+WIFIAPSCAN<a class="headerlink" href="#atwifiapscan" title="Permanent link">~</a></h3>
+<p>Scan WiFi for surrounding acc esspoints.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+WIFIAPSCAN</code></td>
+<td><code>+WIFIAPSCAN=&lt;ssid&gt;,&lt;auth&gt;,&lt;rssi&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;ssid&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>AP SSID (max length 32)</td>
+</tr>
+<tr>
+<td><code>&lt;auth&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>AP require authentication (<code>0</code> or <code>1</code>)</td>
+</tr>
+<tr>
+<td><code>&lt;rssi&gt;</code></td>
+<td>RO</td>
+<td>int8</td>
+<td>AP RSSI in dB</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">WIFIAPSCAN</span>
+</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="o">+</span><span class="nv">WIFIAPSCAN</span><span class="o">=</span><span class="s">&quot;MirkoTik-E12345&quot;</span><span class="o">,</span><span class="mi">1</span><span class="o">,-</span><span class="mi">51</span>
+</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="o">+</span><span class="nv">WIFIAPSCAN</span><span class="o">=</span><span class="s">&quot;Pretty fly for a WiFi&quot;</span><span class="o">,</span><span class="mi">1</span><span class="o">,-</span><span class="mi">69</span>
+</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="o">+</span><span class="nv">WIFIAPSCAN</span><span class="o">=</span><span class="s">&quot;Winternet is Coming&quot;</span><span class="o">,</span><span class="mi">1</span><span class="o">,-</span><span class="mi">72</span>
+</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="o">+</span><span class="nv">WIFIAPSCAN</span><span class="o">=</span><span class="s">&quot;The LAN Before Time&quot;</span><span class="o">,</span><span class="mi">1</span><span class="o">,-</span><span class="mi">75</span>
+</span><span id="__span-49-6"><a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="athostname">AT+HOSTNAME<a class="headerlink" href="#athostname" title="Permanent link">~</a></h3>
+<p>Read/write mDNS hostname.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+HOSTNAME?</code></td>
+<td><code>+HOSTNAME=&lt;hostname&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+HOSTNAME=&lt;hostname&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+HOSTNAME=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;hostname&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Hostname (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">HOSTNAME</span><span class="o">?</span>
+</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="o">+</span><span class="nv">HOSTNAME</span><span class="o">=</span><span class="s">&quot;evse&quot;</span>
+</span><span id="__span-50-3"><a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="nv">OK</span>
+</span><span id="__span-50-4"><a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
+</span><span id="__span-50-5"><a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">HOSTNAME</span><span class="o">=</span><span class="s">&quot;evse2&quot;</span>
+</span><span id="__span-50-6"><a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atinstname">AT+INSTNAME<a class="headerlink" href="#atinstname" title="Permanent link">~</a></h3>
+<p>Read/write mDNS instance name.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+INSTNAME?</code></td>
+<td><code>+INSTNAME=&lt;instance_name&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+INSTNAME=&lt;instance_name&gt;</code></td>
+<td>-</td>
+<td><code>OK</code> | <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>AT+INSTNAME=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;instance_name&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Instance name (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">INSTNAME</span><span class="o">?</span>
+</span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="o">+</span><span class="nv">INSTNAME</span><span class="o">=</span><span class="s">&quot;evse&quot;</span>
+</span><span id="__span-51-3"><a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="nv">OK</span>
+</span><span id="__span-51-4"><a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>
+</span><span id="__span-51-5"><a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">INSTNAME</span><span class="o">=</span><span class="s">&quot;evse2&quot;</span>
+</span><span id="__span-51-6"><a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h2 id="serial-commands">Serial commands<a class="headerlink" href="#serial-commands" title="Permanent link">~</a></h2>
+<h3 id="atserial">AT+SERIAL<a class="headerlink" href="#atserial" title="Permanent link">~</a></h3>
+<p>Read/write serial configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+SERIAL&lt;id&gt;?</code></td>
+<td><code>+SERIAL&lt;id&gt;=&lt;mode&gt;,&lt;baud_rate&gt;,&lt;data_bits&gt;,&lt;stop_bits&gt;,&lt;parity&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+SERIAL&lt;id&gt;=&lt;mode&gt;,&lt;baud_rate&gt;,&lt;data_bits&gt;,&lt;stop_bits&gt;,&lt;parity&gt;</code></td>
+<td>-</td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+SERIAL&lt;id&gt;=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;id&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Serial id (0,1,2?, some chips has only 2 uart)</td>
+</tr>
+<tr>
+<td><code>&lt;mode&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Serial mode (NONE=0, LOG=1, MODBUS=2, NEXTION=3, SCRIPT=4, AT=5)</td>
+</tr>
+<tr>
+<td><code>&lt;baud_rate&gt;</code></td>
+<td>RW</td>
+<td>uint32</td>
+<td>Serial baud rate</td>
+</tr>
+<tr>
+<td><code>&lt;data_bits&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Serial data bits (enum values uart_word_length_t)</td>
+</tr>
+<tr>
+<td><code>&lt;stop_bits&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Serial stop bits (enum values uart_stop_bits_t)</td>
+</tr>
+<tr>
+<td><code>&lt;parity&gt;</code></td>
+<td>RW</td>
+<td>uint8</td>
+<td>Serial parity (enum values uart_parity_t)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SERIAL0</span><span class="o">?</span>
+</span><span id="__span-52-2"><a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a><span class="o">+</span><span class="nv">SERIAL0</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="mi">115200</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span>
+</span><span id="__span-52-3"><a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember which serial port you are using for AT commands. After changing the currently used serial port, you will not be able to revert the changes from here.</p>
+</div>
+<h2 id="board-config">Board config<a class="headerlink" href="#board-config" title="Permanent link">~</a></h2>
+<p>The commands below provide functionality to read board config.</p>
+<h3 id="atdevname">AT+DEVNAME<a class="headerlink" href="#atdevname" title="Permanent link">~</a></h3>
+<p>Print device name.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+DEVNAME?</code></td>
+<td><code>+DEVNAME=&lt;device_name&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+DEVNAME=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;device_name&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Device name (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">DEVNAME</span><span class="o">?</span>
+</span><span id="__span-53-2"><a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="o">+</span><span class="nv">DEVNAME</span><span class="o">=</span><span class="s">&quot;ESP32-DevKitC EVSE&quot;</span>
+</span><span id="__span-53-3"><a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atsocketlock">AT+SOCKETLOCK<a class="headerlink" href="#atsocketlock" title="Permanent link">~</a></h3>
+<p>Print the definition of socket lock.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+SOCKETLOCK?</code></td>
+<td><code>+SOCKETLOCK=&lt;socket_lock&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+SOCKETLOCK=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;socket_lock&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Has defined socket lock (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SOCKETLOCK</span><span class="o">?</span>
+</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="o">+</span><span class="nv">SOCKETLOCK</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atsocketlockminbreaktime">AT+SOCKETLOCKMINBREAKTIME<a class="headerlink" href="#atsocketlockminbreaktime" title="Permanent link">~</a></h3>
+<p>Print socket lock minimum break time.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+SOCKETLOCKMINBREAKTIME?</code></td>
+<td><code>+SOCKETLOCKMINBREAKTIME=&lt;min_break_time&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+SOCKETLOCKMINBREAKTIME=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;min_break_time&gt;</code></td>
+<td>RO</td>
+<td>uint16</td>
+<td>Socket lock min break time in ms</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SOCKETLOCKMINBREAKTIME</span><span class="o">?</span>
+</span><span id="__span-55-2"><a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a><span class="o">+</span><span class="nv">SOCKETLOCKMINBREAKTIME</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-55-3"><a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atproximity">AT+PROXIMITY<a class="headerlink" href="#atproximity" title="Permanent link">~</a></h3>
+<p>Print the definition of a proximity pilot.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+PROXIMITY?</code></td>
+<td><code>+PROXIMITY=&lt;proximity&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+PROXIMITY=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;proximity&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Has defined proximity pilot (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">PROXIMITY</span><span class="o">?</span>
+</span><span id="__span-56-2"><a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a><span class="o">+</span><span class="nv">PROXIMITY</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-56-3"><a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="attempsensor">AT+TEMPSENSOR<a class="headerlink" href="#attempsensor" title="Permanent link">~</a></h3>
+<p>Print the definition of a temperature sensor bus.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+TEMPSENSOR?</code></td>
+<td><code>+TEMPSENSOR=&lt;temperature_sensor&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+TEMPSENSOR=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;temperature_sensor&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Has defined temperature sensor bus (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">TEMPSENSOR</span><span class="o">?</span>
+</span><span id="__span-57-2"><a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="o">+</span><span class="nv">TEMPSENSOR</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-57-3"><a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you have defined temperature sensor bus, it doesn't automaticaly mean you have a connected temperature sensor. Command <code>AT+TEMP</code> returns the count of the active temperature sensors.</p>
+</div>
+<h3 id="atemeter">AT+EMETER<a class="headerlink" href="#atemeter" title="Permanent link">~</a></h3>
+<p>Print the energy meter settings.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+EMETER?</code></td>
+<td><code>+EMETER=&lt;type&gt;,&lt;three_phases&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+EMETER=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;type&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Type of energy meter (NONE=0, CURRENT=1, CURRENT_VOLTAGE=2)</td>
+</tr>
+<tr>
+<td><code>&lt;three_phases&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Three phases energy meter (<code>0</code> or <code>1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">TEMPSENSOR</span><span class="o">?</span>
+</span><span id="__span-58-2"><a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="o">+</span><span class="nv">EMETER</span><span class="o">=</span><span class="mi">2</span><span class="o">,</span><span class="mi">0</span>
+</span><span id="__span-58-3"><a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atserials">AT+SERIALS<a class="headerlink" href="#atserials" title="Permanent link">~</a></h3>
+<p>Print the serial definitions.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+SERIALS?</code></td>
+<td><code>+SERIALS=&lt;type&gt;,&lt;name&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+SERIALS=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;type&gt;</code></td>
+<td>RO</td>
+<td>uint8</td>
+<td>Type of serial (UART=1, RS485=2)</td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Name of serial (max length 32)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">SERIALS</span><span class="o">?</span>
+</span><span id="__span-59-2"><a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="o">+</span><span class="nv">SERIALS</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span><span class="s">&quot;UART via USB&quot;</span>
+</span><span id="__span-59-3"><a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="o">+</span><span class="nv">SERIALS</span><span class="o">=</span><span class="mi">2</span><span class="o">,</span><span class="s">&quot;RS485&quot;</span>
+</span><span id="__span-59-4"><a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="o">+</span><span class="nv">SERIALS</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span><span class="s">&quot;UART&quot;</span>
+</span><span id="__span-59-5"><a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atauxinputs">AT+AUXINPUTS<a class="headerlink" href="#atauxinputs" title="Permanent link">~</a></h3>
+<p>Print AUX input definitions.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+AUXINPUTS?</code></td>
+<td><code>+AUXINPUTS=&lt;name&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+AUXINPUTS=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;name&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Name of input (max length 8)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">AUXINPUTS</span><span class="o">?</span>
+</span><span id="__span-60-2"><a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="o">+</span><span class="nv">AUXINPUTS</span><span class="o">=</span><span class="s">&quot;IN1&quot;</span>
+</span><span id="__span-60-3"><a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="o">+</span><span class="nv">AUXINPUTS</span><span class="o">=</span><span class="s">&quot;IN2&quot;</span>
+</span><span id="__span-60-4"><a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atauxoutputs">AT+AUXOUTPUTS<a class="headerlink" href="#atauxoutputs" title="Permanent link">~</a></h3>
+<p>Print AUX output definitions.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+AUXOUTPUTS?</code></td>
+<td><code>+AUXOUTPUTS=&lt;name&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+AUXOUTPUTS=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;name&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Name of output (max length 8)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">AUXOUTPUTS</span><span class="o">?</span>
+</span><span id="__span-61-2"><a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="o">+</span><span class="nv">AUXOUTPUTS</span><span class="o">=</span><span class="s">&quot;OUT1&quot;</span>
+</span><span id="__span-61-3"><a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="o">+</span><span class="nv">AUXOUTPUTS</span><span class="o">=</span><span class="s">&quot;OUT2&quot;</span>
+</span><span id="__span-61-4"><a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="o">+</span><span class="nv">AUXOUTPUTS</span><span class="o">=</span><span class="s">&quot;OUT3&quot;</span>
+</span><span id="__span-61-5"><a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="o">+</span><span class="nv">AUXOUTPUTS</span><span class="o">=</span><span class="s">&quot;OUT4&quot;</span>
+</span><span id="__span-61-6"><a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h3 id="atauxanaloginputs">AT+AUXANALOGINPUTS<a class="headerlink" href="#atauxanaloginputs" title="Permanent link">~</a></h3>
+<p>Print AUX analog input definitions.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Return Value</th>
+<th>Return Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AT+AUXANALOGINPUTS?</code></td>
+<td><code>+AUXANALOGINPUTS=&lt;name&gt;</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>AT+AUXANALOGINPUTS=?</code></td>
+<td><em>Command description</em></td>
+<td><code>OK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Access</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;name&gt;</code></td>
+<td>RO</td>
+<td>string</td>
+<td>Name of analog input (max length 8)</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="language-at highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="nv">AT</span><span class="o">+</span><span class="nv">AUXANALOGINPUTS</span><span class="o">?</span>
+</span><span id="__span-62-2"><a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="o">+</span><span class="nv">AUXANALOGINPUTS</span><span class="o">=</span><span class="s">&quot;IN3&quot;</span>
+</span><span id="__span-62-3"><a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="nv">OK</span>
+</span></code></pre></div>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">~</a></h2>
+<ul>
+<li><a href="../integration/">Integration Examples</a></li>
+<li><a href="../Modbus/">Modbus</a></li>
+<li><a href="../Nextion/">Nextion</a></li>
+<li><a href="../Lua/">Lua</a></li>
+<li><a href="../rest-api/">REST API</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/sponsors/dzurikmiroslav" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/dzurikmiroslav/esp32-evse/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "content.action.edit", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
