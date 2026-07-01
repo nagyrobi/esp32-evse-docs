@@ -124,7 +124,7 @@ return {
                 name = "Charging current limit", state_topic = state_topic,
                 value_template = "{{ value_json.current }}", icon = "mdi:current-ac",
                 command_topic = id .. "/current/set",
-                min = 6, max = evse.getmaxchargingcurrent(), step = 1,
+                min = 6, max = evse.getmaxchargingcurrent(), step = "0.1",
                 unit_of_measurement = "A", mode = "slider" })
         end
 
